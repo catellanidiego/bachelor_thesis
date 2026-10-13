@@ -1,0 +1,32 @@
+
+int main() {
+	int res = EXIT_SUCCESS;
+	//PARAMETRI DI RK45: funzione, t_finale, stato iniziale, delta_t, atol, rtol, h_new_max	
+	std::ofstream f_out;
+	f_out.open("Test_convergence_results.csv");
+	double r = 0.01;
+	double R = 0.1;
+	double m = 0.08;
+	double s = 0.3;
+	double v = 0.0;
+	F_1 my_F(R, r, m);
+	CycloidalPendulum C(r, R, m, s, v);
+	Eigen::Vector2d Y;
+	Y(0) = 0.3;
+	Y(1) = 0.0;
+	double r_tol_ref = 1e-6;
+	double a_tol_ref = 1e-6;
+	double delta_t = 1e-6;
+	double T = C.calculate_T();
+	double h_new_max = T/100; //get at least 100 points
+	solution_type S = RK_45<F_1>(my_F, T, Y, delta_t, a_tol_ref, r_tol_ref, h_new_max);
+	for (int i = 0; i < S.timestamps.size(); i++) {
+		double s = S.variables[i](0);
+		double x_s = C.x_from_s(s);
+		double y_s = C.y_from_s(s);
+		f_out << x_s << ", " << y_s << "\n";
+	}		
+	f_out.close();
+	std::cout << "	Test eseguito con successo!" << "\n" << "	Lanciare test_plot.py e verificare il moto cicloidale" << "\n";
+	return EXIT_SUCCESS;
+}
