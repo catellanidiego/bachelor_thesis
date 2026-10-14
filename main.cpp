@@ -21,6 +21,7 @@ int main() {
 	double r_tol;
 	double delta_t;
 	double n_periods;
+	double mu_d;
 
 	double manual_insert;
 	std::cout << "Do you wish to insert values manually or use the default ones?" << "\n"
@@ -33,6 +34,7 @@ int main() {
 		  << "   Default relative tolearnce = 1e-12" << "\n"
 		  << "   Default first delta t = 1e-6" << "\n"
 		  << "   Default n° of periods = 10" << "\n"
+		  << "   Default mu_d = 0.000263214" << "\n"
 	          << "Press 1 for default values." << "\n" 
 		  << "Press 2 for manual insertion." << std::endl;
 	while (!(std::cin >> manual_insert) || (manual_insert != 1 && manual_insert != 2)) {
@@ -51,6 +53,7 @@ int main() {
 		r_tol = 1e-12;
 		delta_t = 1e-6;
 		n_periods = 10;
+		mu_d = 0.000263214;
 	}
 	
 	else {
@@ -113,6 +116,13 @@ int main() {
 		std::cout << "Enter number of periods: " << std::endl;
 		while (!(std::cin >> n_periods) || n_periods <= 0) {
 			std::cout << "Invalid input, the number of periods must be > 0. Try again: ";
+			std::cin.clear();
+			std::cin.ignore(10000, '\n');
+		}
+		
+		std::cout << "Enter mu_d coefficient: " << std::endl;
+		while(!(std::cin >> mu_d) || mu_d < 0) {
+			std::cout << "Invalid input, mu_d must be >= 0. Try again: ";
 			std::cin.clear();
 			std::cin.ignore(10000, '\n');
 		}	

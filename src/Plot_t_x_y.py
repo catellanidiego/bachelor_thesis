@@ -18,4 +18,5 @@ def main():
         ax.set_zlabel("Y")
         plt.grid(True)
         plt.show()
-main()
+if __name__ == "__main__":
+    main()
