@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 #include <fstream>
-#include <iostream>
 #include "Calculate_U.hpp"
 #include "Calculate_K.hpp"
+
 void print (const std::vector<double>& t_vec, const std::vector<double>& x_vec, const std::vector<double>& y_vec, const std::vector<double>& v_vec, const std::vector<double>& theta_vec, const std::vector<double>& omega_vec ,const double m) {
 	std::ofstream x_y_file;
 	std::ofstream t_x_y_file;

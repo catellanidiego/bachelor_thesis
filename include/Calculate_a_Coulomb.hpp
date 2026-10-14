@@ -1,6 +1,6 @@
 #pragma once
 #include <cmath>
-double Calculate_a_Coulomb(const double mu_d, const double v, const double s, const double R) {
+inline double Calculate_a_Coulomb(const double mu_d, const double v, const double s, const double R) {
 	const double g = 9.81;
 	const double epsilon = 1e-6;
 	double rad_arg = std::max(0.0, 16*R*R-s*s); //avoid complex numbers

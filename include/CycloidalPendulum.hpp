@@ -1,8 +1,6 @@
 #pragma once
 #include <cmath>
-#include <iostream> //DA TOGLIERE
 #include <Eigen/Dense>
-#include <functional> //DA TOGLIERE
 
 //valuta l'accoppiamento tra le parti (se si propaga l'errore).
 class CycloidalPendulum {

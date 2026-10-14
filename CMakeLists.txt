@@ -13,6 +13,10 @@ add_executable(main main.cpp src/Timecounter.cpp)
 target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(main PRIVATE Eigen3::Eigen)
 
+add_executable (mu_d src/Calculate_mu_d.cpp)
+target_include_directories(mu_d PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(mu_d PRIVATE Eigen3::Eigen)
+
 add_executable(test_RK45 test/test_RK45.cpp)
 target_include_directories(test_RK45 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(test_RK45 PRIVATE Eigen3::Eigen)

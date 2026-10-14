@@ -20,7 +20,7 @@ class F {
 			double Re = Calculate_Re(Y(1), r_F);
 			if (Re <= 1) {
 				double a_D = Calculate_a_D_Stokes(Y(1), r_F, m_F);
-				res(1) += -g/(4*R_F)*Y(0) + a_D;
+				res(1) += -g/(4*R_F)*Y(0) + a_D + t*0; //avoid unusued variables warning
 			}
 			else if (Re > 1 && Re <= 2e5) {
 				double Area = M_PI*r_F*r_F;

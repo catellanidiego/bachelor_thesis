@@ -9,9 +9,7 @@
 #include "CSV_Writer.hpp"
 #include "Timecounter.h"
 
-int main() {
-	const double mu_d = 0.005;
-	
+int main() {	
 	double R;
 	double r;
 	double m;
@@ -34,7 +32,7 @@ int main() {
 		  << "   Default relative tolearnce = 1e-12" << "\n"
 		  << "   Default first delta t = 1e-6" << "\n"
 		  << "   Default n° of periods = 10" << "\n"
-		  << "   Default mu_d = 0.000263214" << "\n"
+		  << "   Default mu_d = 0.000244141" << "\n"
 	          << "Press 1 for default values." << "\n" 
 		  << "Press 2 for manual insertion." << std::endl;
 	while (!(std::cin >> manual_insert) || (manual_insert != 1 && manual_insert != 2)) {
@@ -53,7 +51,7 @@ int main() {
 		r_tol = 1e-12;
 		delta_t = 1e-6;
 		n_periods = 10;
-		mu_d = 0.000263214;
+		mu_d = 0.000244141;
 	}
 	
 	else {

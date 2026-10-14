@@ -1,16 +1,16 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <cmath>
-#include "../include/CycloidalPendulum.hpp" //CAMBIA POI
-#include "../include/RK45_Solver.hpp"
-#include "../include/F_cycloidal_pendulum.hpp"
-#include "../include/Calculate_K.hpp"
-#include "../include/Calculate_U.hpp"
+#include "CycloidalPendulum.hpp"
+#include "RK45_Solver.hpp"
+#include "F_cycloidal_pendulum.hpp"
+#include "Calculate_K.hpp"
+#include "Calculate_U.hpp"
 
 //MANCANO s e E_ref
 int main() {
 	const double E_ref = 0.0217468; //calculated
-	const double epsilon = 1e-6;
+	const double epsilon = 1e-4;
 	
 	double mu_low = 0.0;
 	double mu_high = 0.05; //upper bound
@@ -22,7 +22,7 @@ int main() {
 	double v = 0.0;
 	double a_tol = 1e-6;
 	double r_tol = 1e-6;
-	double delta_t = 1e-6;
+	double delta_t = 1e-4;
 	double n_periods = 10;
 	CycloidalPendulum C(r, R, m);
 	Eigen::Vector2d Y = {s, v};
@@ -42,7 +42,6 @@ int main() {
 		if (std::abs(E - E_ref) < epsilon) {
 			break;
 		}
-		//std::cout << "mu_d = " << mu_d << ", E = " << E << std::endl;
 		if ((mu_high - mu_low) < epsilon) {
 			std::cout << "Maximum precision for mu_d reached." << std::endl;
 			break;

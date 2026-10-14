@@ -4,7 +4,6 @@
 #include <Eigen/Dense>
 #include <cmath>
 
-//rispetto a wikipedia, gli indici qui sono uno in meno, sia nelle righe che nelle colonne per le matrici, mentre per i k sono giusti
 const std::vector<double> A = {0, 1.0/4.0, 3.0/8.0, 12.0/13.0, 1.0, 1.0/2.0};
 const std::vector<double> B_1 = {2.0/9.0}; //corrisponde a k_1
 const std::vector<double> B_2 = {1.0/12.0, 1.0/4.0};
@@ -47,7 +46,7 @@ solution_type RK_45(const Function& F, double t_final, Eigen::VectorXd Y, double
 			Eigen::VectorXd epsilon = a_tol*Eigen::VectorXd::Ones(Y.size()) + r_tol*Y.cwiseAbs();
 			Eigen::VectorXd error_rapports = TE.cwiseQuotient(epsilon);
 			double worst_error = error_rapports.maxCoeff();
-			if (worst_error == 0) {
+			if (worst_error < 1e-15) {
 				worst_error = 1e-15; //avoid dividing by zero
 			}
 

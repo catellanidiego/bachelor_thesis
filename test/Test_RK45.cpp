@@ -1,9 +1,8 @@
-#include "../include/solution_type.hpp"
-#include "../include/RK45_Solver.hpp"
-#include "../include/F_test.hpp"
+#include "solution_type.hpp"
+#include "RK45_Solver.hpp"
+#include "F_test.hpp"
 #include <Eigen/Dense>
 #include <cmath>
-#include <iostream>
 int main() {
 	int res = EXIT_SUCCESS;
 	double delta_t = 1e-6;
