@@ -14,7 +14,7 @@ const std::vector<double> C_4 = {1.0/9.0, 0, 9.0/20.0, 16.0/45.0, 1.0/12.0, 0};
 const std::vector<double> C_5 = {47.0/450.0, 0, 12.0/25.0, 32.0/225.0, 1.0/30.0, 6.0/25.0};
 
 template <typename Function>
-solution_type RK_45(const Function& F, double t_final, Eigen::VectorXd Y, double h, double a_tol, double r_tol, double h_new_max) { 
+solution_type RK_45(const Function& F, double t_final, Eigen::VectorXd Y, double h, double a_tol, double r_tol, double h_new_min, double h_new_max) { 
 	double t = 0.0;
 	solution_type S;
 	S.timestamps.push_back(t);
@@ -55,8 +55,9 @@ solution_type RK_45(const Function& F, double t_final, Eigen::VectorXd Y, double
 				h_new = h_new_max;
 			};
 			
-			if (h_new < a_tol) {
-				h_new = a_tol;
+			if (h_new < h_new_min) {
+				h_new = h_new_min;
+				break;
 			};
 			
 			if (worst_error <= 1.0) {

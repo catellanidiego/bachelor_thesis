@@ -10,7 +10,7 @@
 //MANCANO s e E_ref
 int main() {
 	const double E_ref = 0.0217468; //calculated
-	const double epsilon = 1e-4;
+	const double epsilon = 1e-6;
 	
 	double mu_low = 0.0;
 	double mu_high = 0.05; //upper bound
@@ -20,18 +20,20 @@ int main() {
 	double m = 0.08;
 	double s = 0.137567; //calculated
 	double v = 0.0;
+	double D = 2.8e-4;
 	double a_tol = 1e-6;
 	double r_tol = 1e-6;
-	double delta_t = 1e-4;
-	double n_periods = 10;
+	double delta_t = 1e-3;
+	double n_periods = 100; //cambia
+	double h_new_min = 1e-12;
 	CycloidalPendulum C(r, R, m);
 	Eigen::Vector2d Y = {s, v};
 	double T = C.calculate_T();
-	double h_new_max = T/(100*n_periods);
+	double h_new_max = T/100;
 	double total_T = T*n_periods;
 	while (1) {
-		F my_F(r, R, m, mu_d);
-		solution_type S = RK_45<F>(my_F, total_T, Y, delta_t, a_tol, r_tol, h_new_max);
+		F my_F(r, R, m, mu_d, D);
+		solution_type S = RK_45<F>(my_F, total_T, Y, delta_t, a_tol, r_tol, h_new_min, h_new_max);
 		Eigen::Vector2d Y_last = S.variables.back();
 		double s_int = Y_last(0);
 		double v_int = Y_last(1);

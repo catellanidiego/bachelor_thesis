@@ -1,4 +1,4 @@
-#include "../include/timecounter.h"
+#include "../include/Timecounter.h"
 
 timecounter::timecounter()
 {}

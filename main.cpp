@@ -3,8 +3,6 @@
 #include <string>
 #include "CycloidalPendulum.hpp"
 #include "RK45_Solver.hpp"
-#include "Calculate_a_D_Stokes.hpp"
-#include "Calculate_a_D_White.hpp"
 #include "F_cycloidal_pendulum.hpp"
 #include "CSV_Writer.hpp"
 #include "Timecounter.h"
@@ -19,7 +17,9 @@ int main() {
 	double r_tol;
 	double delta_t;
 	double n_periods;
+	double h_new_min;
 	double mu_d;
+	double D;
 
 	double manual_insert;
 	std::cout << "Do you wish to insert values manually or use the default ones?" << "\n"
@@ -30,8 +30,10 @@ int main() {
 		  << "   Default initial velocity = 0.0 m/s" << "\n" 
 		  << "   Default absolute tolerance = 1e-12" << "\n"
 		  << "   Default relative tolearnce = 1e-12" << "\n"
-		  << "   Default first delta t = 1e-6" << "\n"
+		  << "   Default first delta t = 1e-3" << "\n"
 		  << "   Default n° of periods = 10" << "\n"
+		  << "   Default minimum for new delta t = 1e-12" << "\n"
+		  << "   Default wire diameter = 0.00028" << "\n"
 		  << "   Default mu_d = 0.000244141" << "\n"
 	          << "Press 1 for default values." << "\n" 
 		  << "Press 2 for manual insertion." << std::endl;
@@ -49,8 +51,10 @@ int main() {
 		v = 0.0;
 		a_tol = 1e-12; 
 		r_tol = 1e-12;
-		delta_t = 1e-6;
+		delta_t = 1e-3;
 		n_periods = 10;
+		h_new_min = 1e-12;
+		D = 0.00028;
 		mu_d = 0.000244141;
 	}
 	
@@ -118,6 +122,20 @@ int main() {
 			std::cin.ignore(10000, '\n');
 		}
 		
+		std::cout << "Enter minimum for new delta t: " << std::endl;
+		while (!(std::cin >> h_new_min) || h_new_min <= 0) {
+			std::cout << "Invalid input, minimum for new delta t must be > 0. Try again: ";
+			std::cin.clear();
+			std::cin.ignore(10000, '\n');
+		}
+
+		std::cout << "Enter wire diameter: " << std::endl;
+		while (!(std::cin >> D) || D <= 0) {
+			std::cout << "Invalid input, wire diameter must be > 0. Try again: ";
+			std::cin.clear();
+			std::cin.ignore(10000, '\n');
+		}
+		
 		std::cout << "Enter mu_d coefficient: " << std::endl;
 		while(!(std::cin >> mu_d) || mu_d < 0) {
 			std::cout << "Invalid input, mu_d must be >= 0. Try again: ";
@@ -141,22 +159,22 @@ int main() {
 		timecounter tc;
 		tc.tic();
 		Eigen::Vector2d Y = {s, v};
-		F my_F(r, R, m, mu_d);
+		F my_F(r, R, m, mu_d, D);
 		double T = C.calculate_T();
-		double h_new_max = T/(100*n_periods); //get at least 100 points per period
+		double h_new_max = T/100; //get at least 100 points per period
 		double total_T = T*n_periods;
-		S = RK_45<F>(my_F, total_T, Y, delta_t, a_tol, r_tol, h_new_max);
+		S = RK_45<F>(my_F, total_T, Y, delta_t, a_tol, r_tol, h_new_min, h_new_max);
 		double secs = tc.toc();
 		std::cout << "Elapsed time = " << secs << " seconds" << std::endl;
 	}
 	
 	else {
 		Eigen::Vector2d Y = {s, v};
-		F my_F(r, R, m, mu_d);
+		F my_F(r, R, m, mu_d, D);
 		double T = C.calculate_T();
-		double h_new_max = T/(100*n_periods); //get at least 100 points
+		double h_new_max = T/100; //get at least 100 points
 		double total_T = T*n_periods;
-		S = RK_45<F>(my_F, total_T, Y, delta_t, a_tol, r_tol, h_new_max);
+		S = RK_45<F>(my_F, total_T, Y, delta_t, a_tol, r_tol, h_new_min, h_new_max);
 	}
 	std::vector<double> x_vec;
 	std::vector<double> y_vec;

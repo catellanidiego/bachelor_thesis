@@ -13,9 +13,10 @@ int main() {
 	Eigen::Vector2d Y = {s_0, v_0};
 	double omega = 2.0;
 	double T = 2*M_PI/omega;
+	double h_new_min = 1e-12;
 	double h_new_max = T/20; 
 	F_test my_F(omega);
-	solution_type S = RK_45<F_test>(my_F, T, Y, delta_t, a_tol, r_tol, h_new_max);
+	solution_type S = RK_45<F_test>(my_F, T, Y, delta_t, a_tol, r_tol, h_new_min, h_new_max);
 	int n = S.timestamps.size();
 	Eigen::VectorXd exact_solution(n);
 	Eigen::VectorXd numeric_solution(n);
