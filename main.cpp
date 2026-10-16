@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Eigen/Dense>
-#include <string>
+#include <cctype>
+#include <limits>
 #include "CycloidalPendulum.hpp"
 #include "RK45_Solver.hpp"
 #include "F_cycloidal_pendulum.hpp"
@@ -61,101 +62,149 @@ int main() {
 	else {
 		std::cout << "Enter cycloid's generator ray (meters): " << std::endl;
 		while (!(std::cin >> R) || R <= 0) {
-			std::cout << "Invalid input, R must be > 0. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, R must be > 0. Try again: " << std::endl;
 		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		//tutti così e endl;
 
 		std::cout << "Enter sphere's ray (meters): " << std::endl;
 		while (!(std::cin >> r) || r <= 0) {
-			std::cout << "Invalid input, r must be > 0. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, r must be > 0. Try again: " << std::endl;
 		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	
 		std::cout << "Enter sphere's mass (kg): " << std::endl;
 		while (!(std::cin >> m) || m <= 0) {
-			std::cout << "Invalid input, m must be > 0. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, m must be > 0. Try again: " << std::endl;
 		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	
 		std::cout << "Enter sphere's position (curviliear abscissa) (meters): " << std::endl;
 		while (!(std::cin >> s) || s < 0 || s > 4*R) {
-			std::cout << "Invalid input, s must be >= 0 and <= 4*R. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, s must be >= 0 and <=4*R. Try again: " << std::endl;
 		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	
 		std::cout << "Enter sphere's velocity (m/s): " << std::endl;
 		while (!(std::cin >> v)) {
-			std::cout << "Invalid input, v must be a number. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, R must be a number. Try again: " << std::endl;
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');;
 		}
 			
 		std::cout << "Enter absolute tolerance: " << std::endl;
 		while (!(std::cin >> a_tol) || a_tol <= 0) {
-			std::cout << "Invalid input, a_tol must be > 0. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, a_tol must be > 0. Try again: " << std::endl;
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 
 		std::cout << "Enter relative tolerance: " << std::endl;
 		while (!(std::cin >> r_tol) || r_tol <= 0) {
-			std::cout << "Invalid input, r_tol must be > 0. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, r_tol must be > 0. Try again: " << std::endl;
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}	
 
 		std::cout << "Enter first delta t: " << std::endl;
 		while (!(std::cin >> delta_t) || delta_t <= 0) {
-			std::cout << "Invalid input, delta t must be > 0. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, delta_t must be > 0. Try again: " << std::endl;
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 
 		std::cout << "Enter number of periods: " << std::endl;
 		while (!(std::cin >> n_periods) || n_periods <= 0) {
-			std::cout << "Invalid input, the number of periods must be > 0. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, the number of periods must be > 0. Try again: " << std::endl;
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 		
 		std::cout << "Enter minimum for new delta t: " << std::endl;
 		while (!(std::cin >> h_new_min) || h_new_min <= 0) {
-			std::cout << "Invalid input, minimum for new delta t must be > 0. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, minimum for new delta t must be > 0. Try again: " << std::endl;
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 
 		std::cout << "Enter wire diameter: " << std::endl;
 		while (!(std::cin >> D) || D <= 0) {
-			std::cout << "Invalid input, wire diameter must be > 0. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, wire diameter must be > 0. Try again: " << std::endl;
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
 		
 		std::cout << "Enter mu_eq coefficient: " << std::endl;
 		while(!(std::cin >> mu_eq) || mu_eq < 0) {
-			std::cout << "Invalid input, mu_eq must be >= 0. Try again: ";
-			std::cin.clear();
-			std::cin.ignore(10000, '\n');
+			if (std::cin.fail()) {
+				std::cin.clear();
+			}
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cout << "Invalid input, mu_eq must be >= 0. Try again: " << std::endl;
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}	
 
 	} //END OF ELSE
 
-	std::string time_count;
-	std::cout << "Do you wish record the algorithm speed? Press Y or N capital" << std::endl;
-	while (!(std::cin >> time_count) || (time_count != "Y" && time_count != "N")) {
-		std::cout << "Invalid input: press Y or N capital" << std::endl;
-		std::cin.clear();
-		std::cin.ignore(10000, '\n');
-	}	
+	char time_count;
+	std::cout << "Do you wish record the algorithm speed? (y/n)" << std::endl;
+	while (!(std::cin >> time_count) || (toupper(static_cast<unsigned char>(time_count)) != 'Y' && toupper(static_cast<unsigned char>(time_count)) != 'N')) {
+		if (std::cin.fail()) {
+			std::cin.clear();
+		}
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		std::cout << "Invalid input: press (y/n)" << std::endl;
+	}
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	
 	solution_type S;
 	CycloidalPendulum C(r, R, m);
-	if (time_count == "Y") {
+	if (toupper(time_count) == 'Y') {
 		timecounter tc;
 		tc.tic();
 		Eigen::Vector2d Y = {s, v};
