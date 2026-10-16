@@ -1,30 +1,29 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <cmath>
-#include "CycloidalPendulum.hpp"
-#include "RK45_Solver.hpp"
-#include "F_cycloidal_pendulum.hpp"
-#include "Calculate_K.hpp"
-#include "Calculate_U.hpp"
+#include "../include/CycloidalPendulum.hpp"
+#include "../include/RK45_Solver.hpp"
+#include "../include/F_cycloidal_pendulum.hpp"
+#include "../include/Calculate_K.hpp"
+#include "../include/Calculate_U.hpp"
 
-//MANCANO s e E_ref
 int main() {
-	const double E_ref = 0.0217468; //calculated
+	const double E_ref = 0.0096538248; //calculated
 	const double epsilon = 1e-6;
 	
 	double mu_low = 0.0;
-	double mu_high = 0.05; //upper bound
+	double mu_high = 0.01; //upper bound
 	double mu_eq = (mu_high + mu_low) / 2.0;
 	double R = 0.08;
 	double r = 0.01;
 	double m = 0.08;
-	double s = 0.137567; //calculated
+	double s = 0.137606976567; //calculated
 	double v = 0.0;
 	double D = 2.8e-4;
 	double a_tol = 1e-6;
 	double r_tol = 1e-6;
 	double delta_t = 1e-3;
-	double n_periods = 100; //cambia
+	double n_periods = 145; //AAAAAAAAAAAA SONO 145 
 	double h_new_min = 1e-12;
 	CycloidalPendulum C(r, R, m);
 	Eigen::Vector2d Y = {s, v};
