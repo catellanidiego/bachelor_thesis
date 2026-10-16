@@ -110,7 +110,7 @@ int main() {
 			std::cout << "Invalid input, R must be a number. Try again: " << std::endl;
 		}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');;
-		}
+		
 			
 		std::cout << "Enter absolute tolerance: " << std::endl;
 		while (!(std::cin >> a_tol) || a_tol <= 0) {
@@ -132,7 +132,7 @@ int main() {
 			std::cout << "Invalid input, r_tol must be > 0. Try again: " << std::endl;
 		}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}	
+
 
 		std::cout << "Enter first delta t: " << std::endl;
 		while (!(std::cin >> delta_t) || delta_t <= 0) {
@@ -143,7 +143,7 @@ int main() {
 			std::cout << "Invalid input, delta_t must be > 0. Try again: " << std::endl;
 		}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
+		
 
 		std::cout << "Enter number of periods: " << std::endl;
 		while (!(std::cin >> n_periods) || n_periods <= 0) {
@@ -154,7 +154,7 @@ int main() {
 			std::cout << "Invalid input, the number of periods must be > 0. Try again: " << std::endl;
 		}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
+		
 		
 		std::cout << "Enter minimum for new delta t: " << std::endl;
 		while (!(std::cin >> h_new_min) || h_new_min <= 0) {
@@ -165,7 +165,7 @@ int main() {
 			std::cout << "Invalid input, minimum for new delta t must be > 0. Try again: " << std::endl;
 		}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
+		
 
 		std::cout << "Enter wire diameter: " << std::endl;
 		while (!(std::cin >> D) || D <= 0) {
@@ -176,7 +176,7 @@ int main() {
 			std::cout << "Invalid input, wire diameter must be > 0. Try again: " << std::endl;
 		}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
+		
 		
 		std::cout << "Enter mu_eq coefficient: " << std::endl;
 		while(!(std::cin >> mu_eq) || mu_eq < 0) {
@@ -187,7 +187,7 @@ int main() {
 			std::cout << "Invalid input, mu_eq must be >= 0. Try again: " << std::endl;
 		}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}	
+		
 
 	} //END OF ELSE
 
