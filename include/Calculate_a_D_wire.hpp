@@ -7,7 +7,7 @@ inline double Calculate_a_D_wire(const double R, const double s, const double v,
 	if (p_f < 1e-6) {return 0.0;}
 	double omega = v/p_f;
 	int N = 100;
-	double dp = p_f / 100;
+	double dp = p_f/N;
 	double integral_sum = 0.0;
 	for (int i = 0; i < N; i++) {
 		double p = (i + 0.5)*dp;

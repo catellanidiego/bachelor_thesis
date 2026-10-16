@@ -18,7 +18,7 @@ int main() {
 	double delta_t;
 	double n_periods;
 	double h_new_min;
-	double mu_d;
+	double mu_eq;
 	double D;
 
 	double manual_insert;
@@ -34,7 +34,7 @@ int main() {
 		  << "   Default n° of periods = 10" << "\n"
 		  << "   Default minimum for new delta t = 1e-12" << "\n"
 		  << "   Default wire diameter = 0.00028" << "\n"
-		  << "   Default mu_d = 0.000244141" << "\n"
+		  << "   Default mu_eq = 0.000244141" << "\n"
 	          << "Press 1 for default values." << "\n" 
 		  << "Press 2 for manual insertion." << std::endl;
 	while (!(std::cin >> manual_insert) || (manual_insert != 1 && manual_insert != 2)) {
@@ -55,7 +55,7 @@ int main() {
 		n_periods = 10;
 		h_new_min = 1e-12;
 		D = 0.00028;
-		mu_d = 0.000244141;
+		mu_eq = 0.000244141;
 	}
 	
 	else {
@@ -136,9 +136,9 @@ int main() {
 			std::cin.ignore(10000, '\n');
 		}
 		
-		std::cout << "Enter mu_d coefficient: " << std::endl;
-		while(!(std::cin >> mu_d) || mu_d < 0) {
-			std::cout << "Invalid input, mu_d must be >= 0. Try again: ";
+		std::cout << "Enter mu_eq coefficient: " << std::endl;
+		while(!(std::cin >> mu_eq) || mu_eq < 0) {
+			std::cout << "Invalid input, mu_eq must be >= 0. Try again: ";
 			std::cin.clear();
 			std::cin.ignore(10000, '\n');
 		}	
@@ -159,7 +159,7 @@ int main() {
 		timecounter tc;
 		tc.tic();
 		Eigen::Vector2d Y = {s, v};
-		F my_F(r, R, m, mu_d, D);
+		F my_F(r, R, m, mu_eq, D);
 		double T = C.calculate_T();
 		double h_new_max = T/100; //get at least 100 points per period
 		double total_T = T*n_periods;
@@ -170,7 +170,7 @@ int main() {
 	
 	else {
 		Eigen::Vector2d Y = {s, v};
-		F my_F(r, R, m, mu_d, D);
+		F my_F(r, R, m, mu_eq, D);
 		double T = C.calculate_T();
 		double h_new_max = T/100; //get at least 100 points
 		double total_T = T*n_periods;

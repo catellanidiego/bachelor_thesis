@@ -14,7 +14,7 @@ int main() {
 	
 	double mu_low = 0.0;
 	double mu_high = 0.05; //upper bound
-	double mu_d = (mu_high + mu_low) / 2.0;
+	double mu_eq = (mu_high + mu_low) / 2.0;
 	double R = 0.08;
 	double r = 0.01;
 	double m = 0.08;
@@ -32,7 +32,7 @@ int main() {
 	double h_new_max = T/100;
 	double total_T = T*n_periods;
 	while (1) {
-		F my_F(r, R, m, mu_d, D);
+		F my_F(r, R, m, mu_eq, D);
 		solution_type S = RK_45<F>(my_F, total_T, Y, delta_t, a_tol, r_tol, h_new_min, h_new_max);
 		Eigen::Vector2d Y_last = S.variables.back();
 		double s_int = Y_last(0);
@@ -45,19 +45,20 @@ int main() {
 			break;
 		}
 		if ((mu_high - mu_low) < epsilon) {
-			std::cout << "Maximum precision for mu_d reached." << std::endl;
+			std::cout << "Maximum precision for mu_eq reached." << std::endl;
 			break;
 		}
 		else {
 			if (E > E_ref) {
-				mu_low = mu_d;
+				mu_low = mu_eq
+;
 			}
 			else if (E < E_ref) {
-				mu_high = mu_d;
+				mu_high = mu_eq;
 			}
-			mu_d = (mu_high + mu_low) / 2.0;
+			mu_eq = (mu_high + mu_low) / 2.0;
 		}
 	} 
-	std::cout << "The value of mu_d is " << mu_d << std::endl;
+	std::cout << "The value of mu_eq is " << mu_eq << std::endl;
 	return 0;
 }
