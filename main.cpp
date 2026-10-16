@@ -121,7 +121,7 @@ int main() {
 			std::cout << "Invalid input, a_tol must be > 0. Try again: " << std::endl;
 		}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
+		
 
 		std::cout << "Enter relative tolerance: " << std::endl;
 		while (!(std::cin >> r_tol) || r_tol <= 0) {
