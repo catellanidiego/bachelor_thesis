@@ -8,7 +8,7 @@
 #include "../include/Calculate_U.hpp"
 
 int main() {
-	const double E_ref = 0.00996774479999; //calculated
+	const double E_ref = 0.00996774; //calculated
 	const double epsilon = 1e-6;
 	
 	double mu_low = 0.0;
@@ -17,13 +17,13 @@ int main() {
 	double R = 0.08;
 	double r = 0.01;
 	double m = 0.08;
-	double s = 0.0608683825972; //calculated
+	double s = 0.137607; //calculated
 	double v = 0.0;
 	double D = 2.8e-4;
 	double a_tol = 1e-6;
 	double r_tol = 1e-6;
 	double delta_t = 1e-3;
-	double n_periods = 140; 
+	double n_periods = 144; 
 	double h_new_min = 1e-12;
 	CycloidalPendulum C(r, R, m);
 	Eigen::Vector2d Y = {s, v};

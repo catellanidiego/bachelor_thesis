@@ -54,15 +54,21 @@ solution_type RK_45(const Function& F, double t_final, Eigen::VectorXd Y, double
 			if (h_new > h_new_max) {
 				h_new = h_new_max;
 			};
-			
+
+			Eigen::VectorXd Y_new = Y + C_5[0]*k_1 + C_5[1]*k_2 + C_5[2]*k_3 + C_5[3]*k_4 + C_5[4]*k_5 + C_5[5]*k_6;
+
 			if (h_new < h_new_min) {
 				h_new = h_new_min;
-				break;
+				Y = Y_new;
+				t = t + h;
+				S.timestamps.push_back(t);
+				S.variables.push_back(Y);
+				continue;
 			};
 			
 			if (worst_error <= 1.0) {
 				t = t + h;
-				Y = Y + C_5[0]*k_1 + C_5[1]*k_2 + C_5[2]*k_3 + C_5[3]*k_4 + C_5[4]*k_5 + C_5[5]*k_6;
+				Y = Y_new;
 				S.timestamps.push_back(t);
 				S.variables.push_back(Y);
 				h = h_new;

@@ -35,7 +35,7 @@ int main() {
 		  << "   Default n° of periods = 10" << "\n"
 		  << "   Default minimum for new delta t = 1e-12" << "\n"
 		  << "   Default wire diameter = 0.00028" << "\n"
-		  << "   Default mu_eq = 0.000244141" << "\n"
+		  << "   Default mu_eq = 0.000185242" << "\n"
 	          << "Press 1 for default values." << "\n" 
 		  << "Press 2 for manual insertion." << std::endl;
 	while (!(std::cin >> manual_insert) || (manual_insert != 1 && manual_insert != 2)) {
@@ -56,7 +56,7 @@ int main() {
 		n_periods = 10;
 		h_new_min = 1e-12;
 		D = 0.00028;
-		mu_eq = 0.000244141;
+		mu_eq = 0.000185242;
 	}
 	
 	else {

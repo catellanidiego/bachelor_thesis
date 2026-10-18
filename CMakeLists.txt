@@ -17,6 +17,12 @@ add_executable (mu_eq src/Calculate_mu_eq.cpp)
 target_include_directories(mu_eq PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(mu_eq PRIVATE Eigen3::Eigen)
 
+add_executable (data_for_mu_eq src/Read_data_for_mu_eq_search.cpp)
+target_include_directories(data_for_mu_eq PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_executable (T src/Calculate_T.cpp)
+target_include_directories(T PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 add_executable(test_RK45 test/Test_RK45.cpp)
 target_include_directories(test_RK45 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(test_RK45 PRIVATE Eigen3::Eigen)
