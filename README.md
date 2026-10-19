@@ -80,9 +80,10 @@ ctest
 ## Repository organization
 ```text
  |-CMakeLists.txt
+ |-config.txt
  |-csv
  | |-Data_cycloidal_pendulum.csv
- | |-prova.csv
+ |-Energy_data.png
  |-figure_readme.png
  |-include
  | |-Calculate_a_D_sphere_no_Stokes.hpp
@@ -100,16 +101,17 @@ ctest
  | |-F_cycloidal_pendulum.hpp
  | |-F_test.hpp
  | |-Is_close.hpp
+ | |-Load_config.hpp
  | |-Parameters.hpp
  | |-RK45_Solver.hpp
  | |-Solution_type.hpp
  | |-Timecounter.h
  |-main.cpp
  |-README.md
- |-config.txt
  |-src
  | |-Calculate_mu_eq.cpp
  | |-Calculate_T.cpp
+ | |-Comparison_plot_t_E.py
  | |-desktop.ini
  | |-Plot_theta_omega.py
  | |-Plot_t_E.py
@@ -118,7 +120,6 @@ ctest
  | |-Read_data_for_mu_eq_search.cpp
  | |-Timecounter.cpp
  |-test
- | |-Test_Calculate_a_Coulomb.cpp
  | |-Test_Calculate_a_D_no_Stokes.cpp
  | |-Test_Calculate_a_D_Stokes.cpp
  | |-Test_Calculate_a_D_wire.cpp
@@ -127,8 +128,7 @@ ctest
  | |-Test_Calculate_K.cpp
  | |-Test_Calculate_Re.cpp
  | |-Test_Calculate_U.cpp
- | |-Test_RK45.cpp
-```
+ | |-Test_RK45.cpp```
 
 ## Known limitations
 * **Rigid String Assumption:** The model assumes the pendulum's wire is inextensible and has zero torsional stiffness. The trajectory is assumed to be an ideal cycloid.

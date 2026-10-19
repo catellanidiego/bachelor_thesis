@@ -7,10 +7,18 @@
 #include "CSV_Reader.hpp"
 #include "Parameters.hpp"
 #include "Load_config.hpp"
-
+//this program also creates the Data_for_comparison.csv file
 int main() {
 	Parameters p;
 	load_config("../config.txt", p);
+	try { 
+		p.validate();
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+
 
 	std::string f_dir;
 	std::cout << "Insert csv file direcotry" << std::endl;
@@ -34,7 +42,7 @@ int main() {
 		sum_y += y;
 	}
 	double y_avg = sum_y/y_vec.size();
-	std::vector<double> inversions;
+	std::vector<int> inversions;
 	double current_max_y = - std::numeric_limits<double>::infinity();
 	int current_max_index = -1;
 	bool peak_found = 0;
@@ -63,6 +71,8 @@ int main() {
 		inversions.pop_back();
 	}
 
+	for (const int i : inversions) {std::cout << y_vec[i] << std::endl;}
+	
 	if (inversions.size() > 0) {
 		int first_inversion_index = inversions[0];
 		int last_inversion_index = inversions[inversions.size() - 1];
@@ -76,6 +86,16 @@ int main() {
 		std::cout << "Initial curvilinear abscissa = " << s_1 << std::endl;
 		std::cout << "Initial energy = " << initial_energy << std::endl;
 		std::cout << "Final energy = " << final_energy << std::endl; 
+		std::string out_filename = "../csv/Data_for_comparison.csv";
+		std::ofstream out_file(out_filename);
+		if (out_file.is_open()) {
+			for (size_t i = 0; i < inversions.size(); i++) {
+				int index = inversions[i];
+				out_file << t_vec[index] << ", " << y_vec[index] << "\n";
+			}
+			out_file.close();
+			std::cout << "Data for comparison (t, y_inversion) written in the Data_for_comparison.csv file" << std::endl;
+		}
 	}
 
 	return 0;

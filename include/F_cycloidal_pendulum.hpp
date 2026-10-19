@@ -17,12 +17,13 @@ class F {
 	double g;
 	double rho;
 	double eta;
+	double epsilon;
 	public:	
-		F(double r_int, double R_int, double m_int, double mu_eq_int, double D_int, double g_int, double rho_int, double eta_int, double epsilon_int) : r_F(r_int), R_F(R_int), m_F(m_int), mu_eq_F(mu_eq_int), D_F(D_int), g(g_int), rho(rho_int), eta(eta_int)) {} 
+		F(double r_int, double R_int, double m_int, double mu_eq_int, double D_int, double g_int, double rho_int, double eta_int, double epsilon_int) : r_F(r_int), R_F(R_int), m_F(m_int), mu_eq_F(mu_eq_int), D_F(D_int), g(g_int), rho(rho_int), eta(eta_int), epsilon(epsilon_int) {} 
 		Eigen::VectorXd operator()(double t, const Eigen::Vector2d& Y) const {
 			Eigen::Vector2d res;
 			res(0) = Y(1);
-			res(1) = Calculate_a_friction(mu_eq_F, Y(1), Y(0), R_F, g);
+			res(1) = Calculate_a_friction(mu_eq_F, Y(1), Y(0), R_F, epsilon, g);
 			double Re_sphere = Calculate_Re(Y(1), r_F, rho, eta);
 			if (Re_sphere <= 1) {
 				double a_D_sphere = Calculate_a_D_sphere_Stokes(Y(1), r_F, m_F, eta);

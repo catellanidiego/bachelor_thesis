@@ -12,6 +12,13 @@
 int main() {
 	Parameters p;
 	load_config("../config.txt", p);
+	try { 
+		p.validate();
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
 	CycloidalPendulum C(p.r, p.R, p.m);
 	double y_0 = C.y_from_s(p.s_i);
 	double K_0 = Calculate_K(p.v, p.m);
@@ -29,7 +36,7 @@ int main() {
 	double h_new_max = T/100;
 	double total_T = T*p.n_periods_mu;
 	while (1) {
-		F my_F(p.r, p.R, p.m, mu_eq, p.D, p.g, p.rho, p.eta);
+		F my_F(p.r, p.R, p.m, mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
 		solution_type S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
 		Eigen::Vector2d Y_last = S.variables.back();
 		double s_int = Y_last(0);

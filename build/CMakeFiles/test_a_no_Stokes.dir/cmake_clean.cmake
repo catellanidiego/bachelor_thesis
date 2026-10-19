@@ -1,0 +1,12 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/test_a_no_Stokes.dir/link.d"
+  "CMakeFiles/test_a_no_Stokes.dir/test/Test_Calculate_a_D_no_Stokes.cpp.o"
+  "CMakeFiles/test_a_no_Stokes.dir/test/Test_Calculate_a_D_no_Stokes.cpp.o.d"
+  "test_a_no_Stokes"
+  "test_a_no_Stokes.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/test_a_no_Stokes.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

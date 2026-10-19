@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <cmath>
 struct Parameters {
         double R;
         double r;
@@ -43,5 +44,26 @@ struct Parameters {
 		g = 9.81;
 		rho = 1.204;
 		eta = 1.81e-5;
+	}
+	
+	void validate() const {
+		if (R <= 0) throw std::invalid_argument("Error: the generator ray must be > 0");
+		if (r <= 0) throw std::invalid_argument("Error: the sphere's ray must be > 0");
+		if (m <= 0) throw std::invalid_argument("Error: the sphere's mass must be > 0");
+		if (std::abs(s) > 4*R) throw std::invalid_argument("Error: the sphere's initial position must be <= 4R");
+		if (a_tol <= 0) throw std::invalid_argument("Error: the absolute tolerance must be > 0");
+		if (r_tol <= 0) throw std::invalid_argument("Error: the relative tolerance must be > 0");
+		if (delta_t <= 0) throw std::invalid_argument("Error: the time step must be > 0");
+		if (n_periods < 0) throw std::invalid_argument("Error: the number of periods must be >= 0");
+		if (h_new_min < 0) throw std::invalid_argument("Error: the new minimum step must be >= 0");
+		if (D < 0) throw std::invalid_argument("Error: the wire diameter must be >= 0");
+		if (mu_eq < 0) throw std::invalid_argument("Error: the mu_eq coefficient must be >= 0");
+		if (epsilon <= 0) throw std::invalid_argument("Error: the epsilon must be > 0");
+		if (std::abs(s_i) > 4*R) throw std::invalid_argument("Error: the initial position for mu_ed data extraction must be < 4*R");
+		if (n_periods_mu < 0) throw std::invalid_argument("Error: the number of periods for mu_ed data extraction must be >= 0");
+		if (E_final < 0) throw std::invalid_argument("Error: the finale energy must be >= 0");
+		if (rho <= 0) throw std::invalid_argument("Error: the air density (rho) must be > 0");
+		if (eta <= 0) throw std::invalid_argument("Error: the air viscosity (eta) must be > 0");
+	
 	}
 };

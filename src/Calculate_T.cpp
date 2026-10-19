@@ -9,7 +9,15 @@
 
 int main() {
 	Parameters p;
-	load_config("../config.txt", p);	
+	load_config("../config.txt", p);
+	try { 
+		p.validate();
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	
 	std::string f_dir;
 	std::cout << "Insert csv file directory" << std::endl;
 	while (!(std::cin >> f_dir)) {
