@@ -2,7 +2,6 @@
 #include <cmath>
 #include <Eigen/Dense>
 
-//valuta l'accoppiamento tra le parti (se si propaga l'errore).
 class CycloidalPendulum {
 	double r; //Sphere's ray (m)
 	double R; //Cycloid's generator ray (m)

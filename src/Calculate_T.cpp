@@ -3,9 +3,13 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "../include/CSV_Reader.hpp"
+#include "CSV_Reader.hpp"
+#include "Parameters.hpp"
+#include "Load_config.hpp"
+
 int main() {
-	
+	Parameters p;
+	load_config("../config.txt", p);	
 	std::string f_dir;
 	std::cout << "Insert csv file directory" << std::endl;
 	while (!(std::cin >> f_dir)) {

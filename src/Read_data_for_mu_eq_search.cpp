@@ -4,33 +4,13 @@
 #include <vector>
 #include <fstream>
 #include <cmath>
-#include "../include/CSV_Reader.hpp"
+#include "CSV_Reader.hpp"
+#include "Parameters.hpp"
+#include "Load_config.hpp"
 
 int main() {
-	const double g = 9.81;
-	double R;
-	double m;
-	
-	std::cout << "Enter cycloid's generator ray (meters): " << std::endl;
-	while (!(std::cin >> R) || R <= 0) {
-		if (std::cin.fail()) {
-			std::cin.clear();
-		}
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "Invalid input, R must be > 0. Try again: " << std::endl;
-	}
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-	
-	std::cout << "Enter sphere's mass (kg): " << std::endl;
-	while (!(std::cin >> m) || m <= 0) {
-		if (std::cin.fail()) {
-			std::cin.clear();
-		}
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cout << "Invalid input, m must be > 0. Try again: " << std::endl;
-	}
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
+	Parameters p;
+	load_config("../config.txt", p);
 
 	std::string f_dir;
 	std::cout << "Insert csv file direcotry" << std::endl;
@@ -88,9 +68,9 @@ int main() {
 		int last_inversion_index = inversions[inversions.size() - 1];
 		double y_first_inversion = y_vec[first_inversion_index];
 		double y_last_inversion = y_vec[last_inversion_index];
-		double s_1 = std::pow(8*R*y_first_inversion, 0.5);
-		double initial_energy = m*g*y_first_inversion;
-		double final_energy = m*g*y_last_inversion;
+		double s_1 = std::pow(8*p.R*y_first_inversion, 0.5);
+		double initial_energy = p.m*p.g*y_first_inversion;
+		double final_energy = p.m*p.g*y_last_inversion;
 		int number_of_periods = ((inversions.size() - 1)/ 2);
 		std::cout << "Number of periods = " << number_of_periods << std::endl;
 		std::cout << "Initial curvilinear abscissa = " << s_1 << std::endl;

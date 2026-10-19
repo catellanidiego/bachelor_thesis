@@ -1,58 +1,56 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <cmath>
-#include "../include/CycloidalPendulum.hpp"
-#include "../include/RK45_Solver.hpp"
-#include "../include/F_cycloidal_pendulum.hpp"
-#include "../include/Calculate_K.hpp"
-#include "../include/Calculate_U.hpp"
+#include "CycloidalPendulum.hpp"
+#include "RK45_Solver.hpp"
+#include "F_cycloidal_pendulum.hpp"
+#include "Calculate_K.hpp"
+#include "Calculate_U.hpp"
+#include "Parameters.hpp"
+#include "Load_config.hpp"
 
 int main() {
-	const double E_ref = 0.00996774; //calculated
-	const double epsilon = 1e-6;
-	
+	Parameters p;
+	load_config("../config.txt", p);
+	CycloidalPendulum C(p.r, p.R, p.m);
+	double y_0 = C.y_from_s(p.s_i);
+	double K_0 = Calculate_K(p.v, p.m);
+	double U_0 = Calculate_U(y_0, p.m, p.g);
+	double E_0 = K_0 + U_0;
+	if (E_0 < p.E_final) {
+		std::cerr << "Impossible to solve, initial energy is lower than final energy" << std::endl; 
+		return 1;
+	}
 	double mu_low = 0.0;
 	double mu_high = 0.01; //upper bound
 	double mu_eq = (mu_high + mu_low) / 2.0;
-	double R = 0.08;
-	double r = 0.01;
-	double m = 0.08;
-	double s = 0.137607; //calculated
-	double v = 0.0;
-	double D = 2.8e-4;
-	double a_tol = 1e-6;
-	double r_tol = 1e-6;
-	double delta_t = 1e-3;
-	double n_periods = 144; 
-	double h_new_min = 1e-12;
-	CycloidalPendulum C(r, R, m);
-	Eigen::Vector2d Y = {s, v};
+	Eigen::Vector2d Y = {p.s_i, p.v};
 	double T = C.calculate_T();
 	double h_new_max = T/100;
-	double total_T = T*n_periods;
+	double total_T = T*p.n_periods_mu;
 	while (1) {
-		F my_F(r, R, m, mu_eq, D);
-		solution_type S = RK_45<F>(my_F, total_T, Y, delta_t, a_tol, r_tol, h_new_min, h_new_max);
+		F my_F(p.r, p.R, p.m, mu_eq, p.D, p.g, p.rho, p.eta);
+		solution_type S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
 		Eigen::Vector2d Y_last = S.variables.back();
 		double s_int = Y_last(0);
 		double v_int = Y_last(1);
 		double y_int = C.y_from_s(s_int);
-		double K = Calculate_K(v_int, m);
-		double U = Calculate_U(y_int, m);
+		double K = Calculate_K(v_int, p.m);
+		double U = Calculate_U(y_int, p.m, p.g);
 		double E = K + U;
-		if (std::abs(E - E_ref) < epsilon) {
+		if (std::abs(E - p.E_final) < p.epsilon) {
 			break;
 		}
-		if ((mu_high - mu_low) < epsilon) {
+		if ((mu_high - mu_low) < p.epsilon) {
 			std::cout << "Maximum precision for mu_eq reached." << std::endl;
 			break;
 		}
 		else {
-			if (E > E_ref) {
+			if (E > p.E_final) {
 				mu_low = mu_eq
 ;
 			}
-			else if (E < E_ref) {
+			else if (E < p.E_final) {
 				mu_high = mu_eq;
 			}
 			mu_eq = (mu_high + mu_low) / 2.0;

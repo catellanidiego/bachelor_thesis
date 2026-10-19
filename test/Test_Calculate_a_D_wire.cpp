@@ -8,9 +8,10 @@ int main() {
 	double v = 0.2;
 	double D = 2.8e-4;
 	double m = 0.08;
-	double a_D_wire_estimate = Calculate_a_D_wire(R, s, v, D, m);
-
 	double rho = 1.204;
+	double eta = 1.81e-5;
+	double a_D_wire_estimate = Calculate_a_D_wire(R, s, v, D, m, rho, eta);
+
 	double p_f = std::pow(16*R*R - s*s, 0.5);
 	if (p_f < 1e-6) {return 0.0;}
 	double omega = v/p_f;
@@ -20,7 +21,7 @@ int main() {
 	for (int i = 0; i < N; i++) {
 		double p = (i + 0.5)*dp;
 		double v_local = std::abs(p*omega);
-		double C_D_local = Calculate_C_D_wire(v_local, D);
+		double C_D_local = Calculate_C_D_wire(v_local, D, rho, eta);
 		integral_sum += C_D_local*p*p*dp;
 	}
 	double a_D_wire_exact = 0.5*rho*omega*omega*D*integral_sum/m;
