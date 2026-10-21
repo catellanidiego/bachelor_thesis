@@ -26,7 +26,7 @@ struct Parameters {
 
 	Parameters() { //default constructor
 	        R = 0.08;
-                r = 0.01;
+                r = 0.01187;
                 m = 0.08;
                 s = 0.3;
                 v = 0.0;
@@ -36,11 +36,11 @@ struct Parameters {
                 n_periods = 10;
                 h_new_min = 1e-12;
                 D = 0.00028;
-                mu_eq = 0.000185242;
+                mu_eq = 0.000171509;
 		epsilon = 1e-6;
 		s_i = 0.137607;
-		n_periods_mu = 144;
-		E_final = 0.00996774;
+		n_periods_mu = 134;
+		E_final = 0.0109566;
 		g = 9.81;
 		rho = 1.204;
 		eta = 1.81e-5;

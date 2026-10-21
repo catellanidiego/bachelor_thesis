@@ -70,8 +70,6 @@ int main() {
 	if (inversions.size() > 0 && inversions.size() % 2 == 0) {
 		inversions.pop_back();
 	}
-
-	for (const int i : inversions) {std::cout << y_vec[i] << std::endl;}
 	
 	if (inversions.size() > 0) {
 		int first_inversion_index = inversions[0];

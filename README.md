@@ -76,13 +76,57 @@ cd build
 ctest
 
 ```
+This repository also contains a .cpp script to calculate the period of a pendulum for tracker data.
 
 ## Repository organization
 ```text
  |-CMakeLists.txt
  |-config.txt
  |-csv
+ | |-C_big_1.csv
+ | |-C_big_10.csv
+ | |-C_big_2.csv
+ | |-C_big_3.csv
+ | |-C_big_4.csv
+ | |-C_big_5.csv
+ | |-C_big_6.csv
+ | |-C_big_7.csv
+ | |-C_big_8.csv
+ | |-C_big_9.csv
+ | |-C_small_1.csv
+ | |-C_small_10.csv
+ | |-C_small_11.csv
+ | |-C_small_2.csv
+ | |-C_small_3.csv
+ | |-C_small_4.csv
+ | |-C_small_5.csv
+ | |-C_small_6.csv
+ | |-C_small_7.csv
+ | |-C_small_8.csv
+ | |-C_small_9.csv
  | |-Data_cycloidal_pendulum.csv
+ | |-Data_for_comparison.csv
+ | |-prova.csv
+ | |-S_big_1.csv
+ | |-S_big_10.csv
+ | |-S_big_2.csv
+ | |-S_big_3.csv
+ | |-S_big_4.csv
+ | |-S_big_5.csv
+ | |-S_big_6.csv
+ | |-S_big_7.csv
+ | |-S_big_8.csv
+ | |-S_big_9.csv
+ | |-S_small_1.csv
+ | |-S_small_10.csv
+ | |-S_small_2.csv
+ | |-S_small_3.csv
+ | |-S_small_4.csv
+ | |-S_small_5.csv
+ | |-S_small_6.csv
+ | |-S_small_7.csv
+ | |-S_small_8.csv
+ | |-S_small_9.csv
  |-Energy_data.png
  |-figure_readme.png
  |-include
@@ -102,11 +146,109 @@ ctest
  | |-F_test.hpp
  | |-Is_close.hpp
  | |-Load_config.hpp
- | |-Parameters.hpp
+ | |-parameters.hpp
  | |-RK45_Solver.hpp
  | |-Solution_type.hpp
  | |-Timecounter.h
  |-main.cpp
+ |-prova.csv
+ |-README.md
+ |-src
+ | |-Calculate_mu_eq.cpp
+ | |-Calculate_T.cpp
+ | |-Comparison_plot_t_E.py
+ | |-desktop.ini
+ | |-Plot_theta_omega.py
+ | |-Plot_t_E.py
+ | |-Plot_t_x_y.py
+ | |-Plot_x_y.py
+ | |-Read_data_for_mu_eq_search.cpp
+ | |-Timecounter.cpp
+ | |-togli.py
+ |-test
+ | |-Test_Calculate_a_D_no_Stokes.cpp
+ | |-Test_Calculate_a_D_Stokes.cpp
+ | |-Test_Calculate_a_D_wire.cpp
+ | |-Test_Calculate_a_friction.cpp
+ | |-Test_Calculate_C_D_wire.cpp
+ | |-Test_Calculate_K.cpp
+ | |-Test_Calculate_Re.cpp
+ | |-Test_Calculate_U.cpp
+ | |-Test_RK45.cpp
+pcsdocker@THIS_IS_PCS_DOCKER:~/Data/tesi$ vi albero.txt
+pcsdocker@THIS_IS_PCS_DOCKER:~/Data/tesi$ cat albero.txt
+ |-CMakeLists.txt
+ |-config.txt
+ |-csv
+ | |-C_big_1.csv
+ | |-C_big_10.csv
+ | |-C_big_2.csv
+ | |-C_big_3.csv
+ | |-C_big_4.csv
+ | |-C_big_5.csv
+ | |-C_big_6.csv
+ | |-C_big_7.csv
+ | |-C_big_8.csv
+ | |-C_big_9.csv
+ | |-C_small_1.csv
+ | |-C_small_10.csv
+ | |-C_small_11.csv
+ | |-C_small_2.csv
+ | |-C_small_3.csv
+ | |-C_small_4.csv
+ | |-C_small_5.csv
+ | |-C_small_6.csv
+ | |-C_small_7.csv
+ | |-C_small_8.csv
+ | |-C_small_9.csv
+ | |-Data_cycloidal_pendulum.csv
+ | |-Data_for_comparison.csv
+ | |-prova.csv
+ | |-S_big_1.csv
+ | |-S_big_10.csv
+ | |-S_big_2.csv
+ | |-S_big_3.csv
+ | |-S_big_4.csv
+ | |-S_big_5.csv
+ | |-S_big_6.csv
+ | |-S_big_7.csv
+ | |-S_big_8.csv
+ | |-S_big_9.csv
+ | |-S_small_1.csv
+ | |-S_small_10.csv
+ | |-S_small_2.csv
+ | |-S_small_3.csv
+ | |-S_small_4.csv
+ | |-S_small_5.csv
+ | |-S_small_6.csv
+ | |-S_small_7.csv
+ | |-S_small_8.csv
+ | |-S_small_9.csv
+ |-Energy_data.png
+ |-figure_readme.png
+ |-include
+ | |-Calculate_a_D_sphere_no_Stokes.hpp
+ | |-Calculate_a_D_sphere_Stokes.hpp
+ | |-Calculate_a_D_wire.hpp
+ | |-Calculate_a_friction.hpp
+ | |-Calculate_C_D_sphere_White.hpp
+ | |-Calculate_C_D_wire.hpp
+ | |-Calculate_K.hpp
+ | |-Calculate_Re.hpp
+ | |-Calculate_U.hpp
+ | |-CSV_Reader.hpp
+ | |-CSV_Writer.hpp
+ | |-CycloidalPendulum.hpp
+ | |-F_cycloidal_pendulum.hpp
+ | |-F_test.hpp
+ | |-Is_close.hpp
+ | |-Load_config.hpp
+ | |-parameters.hpp
+ | |-RK45_Solver.hpp
+ | |-Solution_type.hpp
+ | |-Timecounter.h
+ |-main.cpp
+ |-prova.csv
  |-README.md
  |-src
  | |-Calculate_mu_eq.cpp
@@ -128,7 +270,8 @@ ctest
  | |-Test_Calculate_K.cpp
  | |-Test_Calculate_Re.cpp
  | |-Test_Calculate_U.cpp
- | |-Test_RK45.cpp```
+ | |-Test_RK45.cpp
+```
 
 ## Known limitations
 * **Rigid String Assumption:** The model assumes the pendulum's wire is inextensible and has zero torsional stiffness. The trajectory is assumed to be an ideal cycloid.
