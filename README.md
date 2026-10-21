@@ -24,7 +24,7 @@ The drag crisis of both the sphere and the wire is negligible since the $Re$ pea
 - The Runge-Kutta-Fehlberg method, also known as RK45, was implemented with tolerances.
 - RK45 is an adaptive step method, balancing computational efficiency for the more linear parts (the center of the swing) with high precision at the inversion points.
 - Upper and lower limits for the temporal step were added to balance precision and efficiency.
-- Regularization of $\text{sgn}(\dot s)$ function with $\frac{\pi}{2}\arctan(\frac{\dot s}{\varepsilon})$ (otherwise, at inversion points, the absolute error wouldn't decrease with a shorter step).
+- Regularization of $\text{sgn}(\dot s)$ function with $\frac{2}{\pi}\arctan(\frac{\dot s}{\varepsilon})$ (otherwise, at inversion points, the absolute error wouldn't decrease with a shorter step).
 
 ## Using the code
 Parameters can be defined in the `config.txt` file.
