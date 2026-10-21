@@ -32,43 +32,20 @@ int main() {
 	std::vector<std::vector<double>> V = CSV_reader<double>(f_dir, 2);
 	std::vector<double> t_vec = V[0];
 	std::vector<double> x_vec = V[1];
-	std::vector<double> y_vec = V[2];
-
-	const double prominence_threshold = 0.001;
-	double sum_y = 0.0;
-	for (const double y : y_vec) {
-		sum_y = sum_y + y;}
-	double y_avg = sum_y/y_vec.size();
-	std::vector<double> inversions;
-	double current_max_y = -std::numeric_limits<double>::infinity();
-	int current_max_index = -1;
-	bool peak_found = 0;
-	for (size_t i=0; i < y_vec.size(); i++) {
-		if (peak_found == 0) {
-			if (y_vec[i] > y_avg) {
-				if (y_vec[i] > current_max_y) {
-					current_max_index = i;
-					current_max_y = y_vec[i];
-				}
-				else if (y_vec[i] < current_max_y - prominence_threshold) {
-					inversions.push_back(current_max_index);
-					peak_found = 1;
-				}
-			}
-		}
-		else if (y_vec[i] < y_avg) {
-			peak_found = 0;
-			current_max_y = -std::numeric_limits<double>::infinity();
+	std::vector<double> crossings;
+	for (size_t i = 0; i < x_vec.size(); i++) {
+		if (x_vec[i]* x_vec[i+1] < 0.0) {
+			double j = (x_vec[i+1] - x_vec[i])/ (t_vec[i+1] - t_vec[i]);
+			double t_zero = t_vec[i] - (x_vec[i]/j);
+			crossings.push_back(t_zero);
 		}
 	}
-	if (inversions.size() >= 3) {
-		int i_index = inversions[0];
-		int f_index = inversions[2];
-		double t_i = t_vec[i_index];
-		double t_f = t_vec[f_index];
-		double period = t_f - t_i;
+	
+	if (crossings.size() >= 3) {
+		double period = crossings[2] - crossings[0];
 		std::cout << "Period = " << period << " s" << std::endl; 
 	}
+	else {std::cout << "Not enough data to calculate T" << std::endl;}
 
 	return 0;
 }

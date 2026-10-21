@@ -17,6 +17,8 @@ struct Parameters {
 	double D;
         double mu_eq;
 	double epsilon;
+	double E_tol;
+	double mu_tol;
 	double s_i;
 	int n_periods_mu;
 	double E_final;
@@ -30,14 +32,16 @@ struct Parameters {
                 m = 0.08;
                 s = 0.3;
                 v = 0.0;
-                a_tol = 1e-12;
-                r_tol = 1e-12;
+                a_tol = 1e-10;
+                r_tol = 1e-10;
                 delta_t = 1e-3;
                 n_periods = 10;
                 h_new_min = 1e-12;
                 D = 0.00028;
-                mu_eq = 0.000171509;
+                mu_eq = 0.00017;
 		epsilon = 1e-6;
+		E_tol = 1e-10;
+		mu_tol = 1e-10;
 		s_i = 0.137607;
 		n_periods_mu = 134;
 		E_final = 0.0109566;
@@ -59,6 +63,8 @@ struct Parameters {
 		if (D < 0) throw std::invalid_argument("Error: the wire diameter must be >= 0");
 		if (mu_eq < 0) throw std::invalid_argument("Error: the mu_eq coefficient must be >= 0");
 		if (epsilon <= 0) throw std::invalid_argument("Error: the epsilon must be > 0");
+		if (E_tol <= 0) throw std::invalid_argument("Error: the epsilon must be > 0");
+		if (mu_tol <= 0) throw std::invalid_argument("Error: the epsilon must be > 0");
 		if (std::abs(s_i) > 4*R) throw std::invalid_argument("Error: the initial position for mu_ed data extraction must be < 4*R");
 		if (n_periods_mu < 0) throw std::invalid_argument("Error: the number of periods for mu_ed data extraction must be >= 0");
 		if (E_final < 0) throw std::invalid_argument("Error: the finale energy must be >= 0");

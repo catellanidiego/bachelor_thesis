@@ -2,6 +2,7 @@
 #include <Eigen/Dense>
 #include <cctype>
 #include <limits>
+#include <stdexcept>
 #include "CycloidalPendulum.hpp"
 #include "RK45_Solver.hpp"
 #include "F_cycloidal_pendulum.hpp"
@@ -35,25 +36,37 @@ int main() {
 	solution_type S;
 	CycloidalPendulum C(p.r, p.R, p.m);
 	if (toupper(time_count) == 'Y') {
-		timecounter tc;
-		tc.tic();
-		Eigen::Vector2d Y = {p.s, p.v};
-		F my_F(p.r, p.R, p.m, p.mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
-		double T = C.calculate_T();
-		double h_new_max = T/100; //get at least 100 points per period
-		double total_T = T*p.n_periods;
-		S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
-		double secs = tc.toc();
-		std::cout << "Elapsed time = " << secs << " seconds" << std::endl;
+		try {
+			timecounter tc;
+			tc.tic();
+			Eigen::Vector2d Y = {p.s, p.v};
+			F my_F(p.r, p.R, p.m, p.mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
+			double T = C.calculate_T();
+			double h_new_max = T/100; //get at least 100 points per period
+			double total_T = T*p.n_periods;
+			S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
+			double secs = tc.toc();
+			std::cout << "Elapsed time = " << secs << " seconds" << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cerr << e.what() << std::endl;
+			return 1;
+		}
 	}
 	
 	else {
-		Eigen::Vector2d Y = {p.s, p.v};
-		F my_F(p.r, p.R, p.m, p.mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
-		double T = C.calculate_T();
-		double h_new_max = T/100; //get at least 100 points
-		double total_T = T*p.n_periods;
-		S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
+		try {
+			Eigen::Vector2d Y = {p.s, p.v};
+			F my_F(p.r, p.R, p.m, p.mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
+			double T = C.calculate_T();
+			double h_new_max = T/100; //get at least 100 points
+			double total_T = T*p.n_periods;
+			S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
+		}
+		catch (const std::exception& e) {
+			std::cerr << e.what() << std::endl;
+			return 1;
+		}
 	}
 	std::vector<double> x_vec;
 	std::vector<double> y_vec;

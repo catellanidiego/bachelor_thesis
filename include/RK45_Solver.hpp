@@ -3,6 +3,7 @@
 #include <vector>
 #include <Eigen/Dense>
 #include <cmath>
+#include <stdexcept>
 
 const std::vector<double> A = {0, 1.0/4.0, 3.0/8.0, 12.0/13.0, 1.0, 1.0/2.0};
 const std::vector<double> B_1 = {2.0/9.0}; //corrisponde a k_1
@@ -58,12 +59,7 @@ solution_type RK_45(const Function& F, double t_final, Eigen::VectorXd Y, double
 			Eigen::VectorXd Y_new = Y + C_5[0]*k_1 + C_5[1]*k_2 + C_5[2]*k_3 + C_5[3]*k_4 + C_5[4]*k_5 + C_5[5]*k_6;
 
 			if (h_new < h_new_min) {
-				h_new = h_new_min;
-				Y = Y_new;
-				t = t + h;
-				S.timestamps.push_back(t);
-				S.variables.push_back(Y);
-				continue;
+				throw std::runtime_error("Error: integration step below h_min. \n The system doesn't converge. \n Try changing the config.txt file");
 			};
 			
 			if (worst_error <= 1.0) {

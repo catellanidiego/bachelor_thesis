@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Eigen/Dense>
 #include <cmath>
+#include <stdexcept>
 #include "CycloidalPendulum.hpp"
 #include "RK45_Solver.hpp"
 #include "F_cycloidal_pendulum.hpp"
@@ -35,34 +36,39 @@ int main() {
 	double T = C.calculate_T();
 	double h_new_max = T/100;
 	double total_T = T*p.n_periods_mu;
-	while (1) {
-		F my_F(p.r, p.R, p.m, mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
-		solution_type S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
-		Eigen::Vector2d Y_last = S.variables.back();
-		double s_int = Y_last(0);
-		double v_int = Y_last(1);
-		double y_int = C.y_from_s(s_int);
-		double K = Calculate_K(v_int, p.m);
-		double U = Calculate_U(y_int, p.m, p.g);
-		double E = K + U;
-		if (std::abs(E - p.E_final) < p.epsilon) {
-			break;
-		}
-		if ((mu_high - mu_low) < p.epsilon) {
-			std::cout << "Maximum precision for mu_eq reached." << std::endl;
-			break;
-		}
-		else {
-			if (E > p.E_final) {
-				mu_low = mu_eq
-;
+	try {
+		while (1) {
+			F my_F(p.r, p.R, p.m, mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
+			solution_type S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
+			Eigen::Vector2d Y_last = S.variables.back();
+			double s_int = Y_last(0);
+			double v_int = Y_last(1);
+			double y_int = C.y_from_s(s_int);
+			double K = Calculate_K(v_int, p.m);
+			double U = Calculate_U(y_int, p.m, p.g);
+			double E = K + U;
+			if (std::abs(E - p.E_final) < p.E_tol) {
+				break;
 			}
-			else if (E < p.E_final) {
-				mu_high = mu_eq;
+			if ((mu_high - mu_low) < p.mu_tol) {
+				std::cout << "Maximum precision for mu_eq reached." << std::endl;
+				break;
 			}
+			else {
+				if (E > p.E_final) {
+					mu_low = mu_eq;
+				}
+				else if (E < p.E_final) {
+					mu_high = mu_eq;
+				}
 			mu_eq = (mu_high + mu_low) / 2.0;
+			}
 		}
-	} 
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
 	std::cout << "The value of mu_eq is " << mu_eq << std::endl;
 	return 0;
 }
