@@ -1,1 +1,0 @@
-/usr/bin/c++  -Wall -Wextra -Wshadow -Werror=vla -Wl,--dependency-file=CMakeFiles/mu_eq.dir/link.d CMakeFiles/mu_eq.dir/src/Calculate_mu_eq.cpp.o -o mu_eq

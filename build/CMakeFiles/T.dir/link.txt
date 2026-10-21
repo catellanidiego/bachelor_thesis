@@ -1,1 +1,0 @@
-/usr/bin/c++  -Wall -Wextra -Wshadow -Werror=vla -Wl,--dependency-file=CMakeFiles/T.dir/link.d CMakeFiles/T.dir/src/Calculate_T.cpp.o -o T

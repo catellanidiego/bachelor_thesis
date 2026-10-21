@@ -1,1 +1,0 @@
-/usr/bin/c++  -Wall -Wextra -Wshadow -Werror=vla -Wl,--dependency-file=CMakeFiles/test_C_D_wire.dir/link.d CMakeFiles/test_C_D_wire.dir/test/Test_Calculate_C_D_wire.cpp.o -o test_C_D_wire
