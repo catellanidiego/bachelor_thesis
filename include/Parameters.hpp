@@ -49,7 +49,7 @@ struct Parameters {
 		g = 9.81;
 		rho = 1.204;
 		eta = 1.81e-5;
-		T_final_mu 159,19;
+		T_final_mu = 158.55;
 	}
 	
 	void validate() const {

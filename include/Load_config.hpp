@@ -26,6 +26,6 @@ void load_config(const std::string& filename, Parameters& p) {
 		else if (key == "g") {file >> p.g;}
 		else if (key == "rho") {file >> p.rho;}
 		else if (key == "eta") {file >> p.eta;}
-
+		else if (key == "T_final_mu") {file >> p.T_final_mu;}
 	}
 }

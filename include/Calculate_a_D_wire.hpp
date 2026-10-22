@@ -12,7 +12,7 @@ inline double Calculate_a_D_wire(const double R, const double s, const double v,
 		double p = (i + 0.5)*dp;
 		double v_local = std::abs(p*omega);
 		double C_D_local = Calculate_C_D_wire(v_local, D, rho, eta);
-		integral_sum += C_D_local*p*p*dp;
+		integral_sum += C_D_local*p*p*(p/p_f)*dp;
 	}
 	double a_D_wire = 0.5*rho*omega*omega*D*integral_sum/m; //wire's mass is negligible compared to the sphere's mass
 	if (v > 0) {
