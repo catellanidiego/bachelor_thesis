@@ -33,7 +33,7 @@ int main() {
 	std::vector<double> t_vec = V[0];
 	std::vector<double> x_vec = V[1];
 	std::vector<double> crossings;
-	for (size_t i = 0; i < x_vec.size(); i++) {
+	for (size_t i = 0; i < x_vec.size() - 1; i++) {
 		if (x_vec[i]* x_vec[i+1] < 0.0) {
 			double j = (x_vec[i+1] - x_vec[i])/ (t_vec[i+1] - t_vec[i]);
 			double t_zero = t_vec[i] - (x_vec[i]/j);

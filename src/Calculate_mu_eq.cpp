@@ -35,7 +35,7 @@ int main() {
 	Eigen::Vector2d Y = {p.s_i, p.v};
 	double T = C.calculate_T();
 	double h_new_max = T/100;
-	double total_T = T*p.n_periods_mu;
+	double total_T = p.T_final_mu;
 	try {
 		while (1) {
 			F my_F(p.r, p.R, p.m, mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
