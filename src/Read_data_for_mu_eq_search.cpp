@@ -85,7 +85,7 @@ int main() {
 		std::cout << "Initial curvilinear abscissa = " << s_1 << std::endl;
 		std::cout << "Initial energy = " << initial_energy << std::endl;
 		std::cout << "Final energy = " << final_energy << std::endl;
-		std::cout << "Time of last period end" << final_time << std::endl; 
+		std::cout << "Time of last period end = " << final_time << std::endl; 
 		std::string out_filename = "../csv/Data_for_comparison.csv";
 		std::ofstream out_file(out_filename);
 		if (out_file.is_open()) {
