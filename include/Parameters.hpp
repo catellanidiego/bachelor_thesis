@@ -45,7 +45,7 @@ struct Parameters {
 		mu_tol = 1e-10;
 		s_i = 0.137607;
 		n_periods_mu = 134;
-		E_final = 0.0109566;
+		E_final = 0.00996774;
 		g = 9.81;
 		rho = 1.204;
 		eta = 1.81e-5;

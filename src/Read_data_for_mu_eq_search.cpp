@@ -79,7 +79,7 @@ int main() {
 		double s_1 = std::pow(8*p.R*y_first_inversion, 0.5);
 		double initial_energy = p.m*p.g*y_first_inversion;
 		double final_energy = p.m*p.g*y_last_inversion;
-		double final_time = t_vec[last_inversion_index];
+		double final_time = t_vec[last_inversion_index] - t_vec[first_inversion_index];
 		int number_of_periods = ((inversions.size() - 1)/ 2);
 		std::cout << "Number of periods = " << number_of_periods << std::endl;
 		std::cout << "Initial curvilinear abscissa = " << s_1 << std::endl;
