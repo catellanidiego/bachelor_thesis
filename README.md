@@ -7,9 +7,11 @@ This repository is part of the bachelor thesis "The isochronous pendulum" by Die
 ## Requirements:
 * **C++ standard:** C++20 Standard
 * **Python libraries:** `matplotlib`, `csv`
+* **Eigen version:** Eigen3 $\ge$ 3.3
+* **CMake version:** CMake $\ge$ 3.20
 
 ## Physical model:
-**Equation of motion:** $m\ddot{s} + m\frac{g}{4R}s + \frac{1}{2}\rho C_{D,\text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s) + \frac{1}{2}\rho D \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_D(p)p^2dp + \mu_{eq}m(g \cos(\theta) + \frac{v^2}{P(s)})  = 0$
+**Equation of motion:** $m\ddot{s} + m\frac{g}{4R}s + \frac{1}{2}\rho C_{D,\text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s) + \frac{1}{2}\frac{\rho D}{\lambda} \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_D(p)p^3dp + \mu_{eq}m(g \cos(\theta) + \frac{v^2}{P(s)})  = 0$
 
 - Wire-cheek friction: $\mu_{eq}m(g\cos(\theta) + \frac{v^2}{P(s)})$
     - $\mu_{eq}$ is calculated by comparing energy dissipation in the numerical simulation with data extracted from video tracking the physical pendulum.
@@ -76,201 +78,101 @@ cd build
 ctest
 
 ```
-This repository also contains a .cpp script to calculate the period of a pendulum for tracker data.
+This repository also contains a .cpp script to calculate the period, the amplitude and the angle %\theta% of a pendulum for tracker data.
 
 ## Repository organization
 ```text
- |-CMakeLists.txt
- |-config.txt
- |-csv
- | |-C_big_1.csv
- | |-C_big_10.csv
- | |-C_big_2.csv
- | |-C_big_3.csv
- | |-C_big_4.csv
- | |-C_big_5.csv
- | |-C_big_6.csv
- | |-C_big_7.csv
- | |-C_big_8.csv
- | |-C_big_9.csv
- | |-C_small_1.csv
- | |-C_small_10.csv
- | |-C_small_11.csv
- | |-C_small_2.csv
- | |-C_small_3.csv
- | |-C_small_4.csv
- | |-C_small_5.csv
- | |-C_small_6.csv
- | |-C_small_7.csv
- | |-C_small_8.csv
- | |-C_small_9.csv
- | |-Data_cycloidal_pendulum.csv
- | |-Data_for_comparison.csv
- | |-prova.csv
- | |-S_big_1.csv
- | |-S_big_10.csv
- | |-S_big_2.csv
- | |-S_big_3.csv
- | |-S_big_4.csv
- | |-S_big_5.csv
- | |-S_big_6.csv
- | |-S_big_7.csv
- | |-S_big_8.csv
- | |-S_big_9.csv
- | |-S_small_1.csv
- | |-S_small_10.csv
- | |-S_small_2.csv
- | |-S_small_3.csv
- | |-S_small_4.csv
- | |-S_small_5.csv
- | |-S_small_6.csv
- | |-S_small_7.csv
- | |-S_small_8.csv
- | |-S_small_9.csv
- |-Energy_data.png
- |-figure_readme.png
- |-include
- | |-Calculate_a_D_sphere_no_Stokes.hpp
- | |-Calculate_a_D_sphere_Stokes.hpp
- | |-Calculate_a_D_wire.hpp
- | |-Calculate_a_friction.hpp
- | |-Calculate_C_D_sphere_White.hpp
- | |-Calculate_C_D_wire.hpp
- | |-Calculate_K.hpp
- | |-Calculate_Re.hpp
- | |-Calculate_U.hpp
- | |-CSV_Reader.hpp
- | |-CSV_Writer.hpp
- | |-CycloidalPendulum.hpp
- | |-F_cycloidal_pendulum.hpp
- | |-F_test.hpp
- | |-Is_close.hpp
- | |-Load_config.hpp
- | |-parameters.hpp
- | |-RK45_Solver.hpp
- | |-Solution_type.hpp
- | |-Timecounter.h
- |-main.cpp
- |-prova.csv
- |-README.md
- |-src
- | |-Calculate_mu_eq.cpp
- | |-Calculate_T.cpp
- | |-Comparison_plot_t_E.py
- | |-desktop.ini
- | |-Plot_theta_omega.py
- | |-Plot_t_E.py
- | |-Plot_t_x_y.py
- | |-Plot_x_y.py
- | |-Read_data_for_mu_eq_search.cpp
- | |-Timecounter.cpp
- | |-togli.py
- |-test
- | |-Test_Calculate_a_D_no_Stokes.cpp
- | |-Test_Calculate_a_D_Stokes.cpp
- | |-Test_Calculate_a_D_wire.cpp
- | |-Test_Calculate_a_friction.cpp
- | |-Test_Calculate_C_D_wire.cpp
- | |-Test_Calculate_K.cpp
- | |-Test_Calculate_Re.cpp
- | |-Test_Calculate_U.cpp
- | |-Test_RK45.cpp
-pcsdocker@THIS_IS_PCS_DOCKER:~/Data/tesi$ vi albero.txt
-pcsdocker@THIS_IS_PCS_DOCKER:~/Data/tesi$ cat albero.txt
- |-CMakeLists.txt
- |-config.txt
- |-csv
- | |-C_big_1.csv
- | |-C_big_10.csv
- | |-C_big_2.csv
- | |-C_big_3.csv
- | |-C_big_4.csv
- | |-C_big_5.csv
- | |-C_big_6.csv
- | |-C_big_7.csv
- | |-C_big_8.csv
- | |-C_big_9.csv
- | |-C_small_1.csv
- | |-C_small_10.csv
- | |-C_small_11.csv
- | |-C_small_2.csv
- | |-C_small_3.csv
- | |-C_small_4.csv
- | |-C_small_5.csv
- | |-C_small_6.csv
- | |-C_small_7.csv
- | |-C_small_8.csv
- | |-C_small_9.csv
- | |-Data_cycloidal_pendulum.csv
- | |-Data_for_comparison.csv
- | |-prova.csv
- | |-S_big_1.csv
- | |-S_big_10.csv
- | |-S_big_2.csv
- | |-S_big_3.csv
- | |-S_big_4.csv
- | |-S_big_5.csv
- | |-S_big_6.csv
- | |-S_big_7.csv
- | |-S_big_8.csv
- | |-S_big_9.csv
- | |-S_small_1.csv
- | |-S_small_10.csv
- | |-S_small_2.csv
- | |-S_small_3.csv
- | |-S_small_4.csv
- | |-S_small_5.csv
- | |-S_small_6.csv
- | |-S_small_7.csv
- | |-S_small_8.csv
- | |-S_small_9.csv
- |-Energy_data.png
- |-figure_readme.png
- |-include
- | |-Calculate_a_D_sphere_no_Stokes.hpp
- | |-Calculate_a_D_sphere_Stokes.hpp
- | |-Calculate_a_D_wire.hpp
- | |-Calculate_a_friction.hpp
- | |-Calculate_C_D_sphere_White.hpp
- | |-Calculate_C_D_wire.hpp
- | |-Calculate_K.hpp
- | |-Calculate_Re.hpp
- | |-Calculate_U.hpp
- | |-CSV_Reader.hpp
- | |-CSV_Writer.hpp
- | |-CycloidalPendulum.hpp
- | |-F_cycloidal_pendulum.hpp
- | |-F_test.hpp
- | |-Is_close.hpp
- | |-Load_config.hpp
- | |-parameters.hpp
- | |-RK45_Solver.hpp
- | |-Solution_type.hpp
- | |-Timecounter.h
- |-main.cpp
- |-prova.csv
- |-README.md
- |-src
- | |-Calculate_mu_eq.cpp
- | |-Calculate_T.cpp
- | |-Comparison_plot_t_E.py
- | |-desktop.ini
- | |-Plot_theta_omega.py
- | |-Plot_t_E.py
- | |-Plot_t_x_y.py
- | |-Plot_x_y.py
- | |-Read_data_for_mu_eq_search.cpp
- | |-Timecounter.cpp
- |-test
- | |-Test_Calculate_a_D_no_Stokes.cpp
- | |-Test_Calculate_a_D_Stokes.cpp
- | |-Test_Calculate_a_D_wire.cpp
- | |-Test_Calculate_a_friction.cpp
- | |-Test_Calculate_C_D_wire.cpp
- | |-Test_Calculate_K.cpp
- | |-Test_Calculate_Re.cpp
- | |-Test_Calculate_U.cpp
- | |-Test_RK45.cpp
+  |-CMakeLists.txt
+  |-config.txt
+  |-csv
+  |  |-C_big_1.csv
+  |  |-C_big_10.csv
+  |  |-C_big_2.csv
+  |  |-C_big_3.csv
+  |  |-C_big_4.csv
+  |  |-C_big_5.csv
+  |  |-C_big_6.csv
+  |  |-C_big_7.csv
+  |  |-C_big_8.csv
+  |  |-C_big_9.csv
+  |  |-C_small_1.csv
+  |  |-C_small_10.csv
+  |  |-C_small_2.csv
+  |  |-C_small_3.csv
+  |  |-C_small_4.csv
+  |  |-C_small_5.csv
+  |  |-C_small_6.csv
+  |  |-C_small_7.csv
+  |  |-C_small_8.csv
+  |  |-C_small_9.csv
+  |  |-Data_cycloidal_pendulum.csv
+  |  |-Data_for_comparison.csv
+  |  |-S_big_1.csv
+  |  |-S_big_10.csv
+  |  |-S_big_2.csv
+  |  |-S_big_3.csv
+  |  |-S_big_4.csv
+  |  |-S_big_5.csv
+  |  |-S_big_6.csv
+  |  |-S_big_7.csv
+  |  |-S_big_8.csv
+  |  |-S_big_9.csv
+  |  |-S_small_1.csv
+  |  |-S_small_10.csv
+  |  |-S_small_2.csv
+  |  |-S_small_3.csv
+  |  |-S_small_4.csv
+  |  |-S_small_5.csv
+  |  |-S_small_6.csv
+  |  |-S_small_7.csv
+  |  |-S_small_8.csv
+  |  |-S_small_9.csv
+  |-Energy_data.png
+  |-figure_readme.png
+  |-include
+  |  |-Calculate_a_D_sphere_no_Stokes.hpp
+  |  |-Calculate_a_D_sphere_Stokes.hpp
+  |  |-Calculate_a_D_wire.hpp
+  |  |-Calculate_a_friction.hpp
+  |  |-Calculate_C_D_sphere_White.hpp
+  |  |-Calculate_C_D_wire.hpp
+  |  |-Calculate_K.hpp
+  |  |-Calculate_Re.hpp
+  |  |-Calculate_U.hpp
+  |  |-CSV_Reader.hpp
+  |  |-CSV_Writer.hpp
+  |  |-CycloidalPendulum.hpp
+  |  |-F_cycloidal_pendulum.hpp
+  |  |-F_test.hpp
+  |  |-Is_close.hpp
+  |  |-Load_config.hpp
+  |  |-parameters.hpp
+  |  |-RK45_Solver.hpp
+  |  |-Solution_type.hpp
+  |  |-Timecounter.h
+  |-main.cpp
+  |-prova.csv
+  |-README.md
+  |-src
+  |  |-Calculate_mu_eq.cpp
+  |  |-Calculate_T_A_theta.cpp
+  |  |-Comparison_plot_t_E.py
+  |  |-Plot_theta_omega.py
+  |  |-Plot_t_E.py
+  |  |-Plot_t_x_y.py
+  |  |-Plot_x_y.py
+  |  |-Read_data_for_mu_eq_search.cpp
+  |  |-Timecounter.cpp
+  |-test
+  |  |-Test_Calculate_a_D_no_Stokes.cpp
+  |  |-Test_Calculate_a_D_Stokes.cpp
+  |  |-Test_Calculate_a_D_wire.cpp
+  |  |-Test_Calculate_a_friction.cpp
+  |  |-Test_Calculate_C_D_wire.cpp
+  |  |-Test_Calculate_K.cpp
+  |  |-Test_Calculate_Re.cpp
+  |  |-Test_Calculate_U.cpp
+  |  |-Test_RK45.cpp
 ```
 
 ## Known limitations

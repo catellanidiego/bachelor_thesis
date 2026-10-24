@@ -62,7 +62,7 @@ int main() {
 		while ((theta_c_high - theta_c_low) > p.theta_tol) {
 			amplitude_c = p.R*(2.0*theta_c + std::sin(2.0*theta_c));
 			if (amplitude_c < amplitude) {theta_c_low = theta_c;}
-			else if (amplitude_c > amplitude) {theta_c_high = theta_c;}
+			else {theta_c_high = theta_c;}
 			theta_c = (theta_c_low + theta_c_high)/2.0;
 		}
 		std::cout << "Period = " << period << " s" << std::endl;

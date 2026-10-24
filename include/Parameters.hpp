@@ -20,7 +20,6 @@ struct Parameters {
 	double E_tol;
 	double mu_tol;
 	double s_i;
-	int n_periods_mu;
 	double E_final;
 	double g;
 	double rho;
@@ -45,12 +44,11 @@ struct Parameters {
 		E_tol = 1e-10;
 		mu_tol = 1e-10;
 		s_i = 0.137607;
-		n_periods_mu = 134;
-		E_final = 0.00996774;
+		E_final = 0.0107055;
 		g = 9.81;
 		rho = 1.204;
 		eta = 1.81e-5;
-		T_final_mu = 158.55;
+		T_final_mu = 155.329;
 		theta_tol = 1e-6;
 	}
 	
@@ -70,7 +68,6 @@ struct Parameters {
 		if (E_tol <= 0) throw std::invalid_argument("Error: the epsilon must be > 0");
 		if (mu_tol <= 0) throw std::invalid_argument("Error: the epsilon must be > 0");
 		if (std::abs(s_i) > 4*R) throw std::invalid_argument("Error: the initial position for mu_ed data extraction must be < 4*R");
-		if (n_periods_mu < 0) throw std::invalid_argument("Error: the number of periods for mu_ed data extraction must be >= 0");
 		if (E_final < 0) throw std::invalid_argument("Error: the finale energy must be >= 0");
 		if (rho <= 0) throw std::invalid_argument("Error: the air density (rho) must be > 0");
 		if (eta <= 0) throw std::invalid_argument("Error: the air viscosity (eta) must be > 0");

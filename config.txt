@@ -14,10 +14,9 @@ epsilon 1e-6
 E_tol 1e-10
 mu_tol 1e-10
 s_i 0.137607
-n_periods_mu 144
-E_final 0.00996774
+E_final 0.010755
 g 9.81
 rho 1.204
 eta 1.81e-5
-T_final_mu 158.55
+T_final_mu 155.329
 theta_tol 1e-6

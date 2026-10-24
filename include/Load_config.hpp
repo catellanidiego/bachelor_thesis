@@ -21,7 +21,6 @@ void load_config(const std::string& filename, Parameters& p) {
 		else if (key == "mu_eq") {file >> p.mu_eq;}
 		else if (key == "epsilon") {file >> p.epsilon;}
 		else if (key == "s_i") {file >> p.s_i;}
-		else if (key == "n_periods_mu") {file >> p.n_periods_mu;}
 		else if (key == "E_final") {file >> p.E_final;}
 		else if (key == "g") {file >> p.g;}
 		else if (key == "rho") {file >> p.rho;}

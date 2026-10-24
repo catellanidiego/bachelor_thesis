@@ -20,8 +20,8 @@ target_link_libraries(mu_eq PRIVATE Eigen3::Eigen)
 add_executable (data_for_mu_eq src/Read_data_for_mu_eq_search.cpp)
 target_include_directories(data_for_mu_eq PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-add_executable (data src/Calculate_T_A_theta.cpp)
-target_include_directories(data PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+add_executable (data_period src/Calculate_T_A_theta.cpp)
+target_include_directories(data_period PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_executable(test_RK45 test/Test_RK45.cpp)
 target_include_directories(test_RK45 PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
