@@ -18,7 +18,7 @@ This repository is part of the bachelor thesis "The isochronous pendulum" by Die
     - The formulation follows Meriam and Kraige description. [1]
 - Drag on the sphere: $\frac{1}{2}\rho C_{D, \text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s)$
     - $C_D$ is calculated with Stokes's regime ($\text{Re} < 1$) [4], and White's regime ($1\le \text{Re}\le 2\cdot 10^5$) [5].
-- Drag on the wire: $\frac{1}{2}\rho D \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_{D, \text{wire}}(p)p^2dp $
+- Drag on the wire: $\frac{1}{2}\frac{\rho D}{\lambda} \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_D(p)p^3dp$
     - $C_D$ was calculated with the Nelson and Olsson approximation ($\text{Re} < 10^{-4}$) [2], and Sucker and Brauer best-fit curve ($10^{-4} \le \text{Re} \le 2\cdot 10^5$) [3]
 The drag crisis of both the sphere and the wire is negligible since the $Re$ peaks at around 2000.
 
@@ -78,7 +78,14 @@ cd build
 ctest
 
 ```
-This repository also contains a .cpp script to calculate the period, the amplitude and the angle %\theta% of a pendulum for tracker data.
+This repository also contains a .cpp script to calculate the period, the amplitude and the angle $\theta$ of a pendulum for tracker data.
+```bash
+
+cd build
+
+./data_period
+
+```
 
 ## Repository organization
 ```text
@@ -106,7 +113,6 @@ This repository also contains a .cpp script to calculate the period, the amplitu
   |  |-C_small_8.csv
   |  |-C_small_9.csv
   |  |-Data_cycloidal_pendulum.csv
-  |  |-Data_for_comparison.csv
   |  |-S_big_1.csv
   |  |-S_big_10.csv
   |  |-S_big_2.csv
@@ -127,7 +133,6 @@ This repository also contains a .cpp script to calculate the period, the amplitu
   |  |-S_small_7.csv
   |  |-S_small_8.csv
   |  |-S_small_9.csv
-  |-Energy_data.png
   |-figure_readme.png
   |-include
   |  |-Calculate_a_D_sphere_no_Stokes.hpp
@@ -151,12 +156,10 @@ This repository also contains a .cpp script to calculate the period, the amplitu
   |  |-Solution_type.hpp
   |  |-Timecounter.h
   |-main.cpp
-  |-prova.csv
   |-README.md
   |-src
   |  |-Calculate_mu_eq.cpp
   |  |-Calculate_T_A_theta.cpp
-  |  |-Comparison_plot_t_E.py
   |  |-Plot_theta_omega.py
   |  |-Plot_t_E.py
   |  |-Plot_t_x_y.py
@@ -182,8 +185,8 @@ This repository also contains a .cpp script to calculate the period, the amplitu
 * **2D Planar Motion:** The simulation strictly models 2D planar motion, deliberately ignoring secondary 3D phenomena such as minor lateral swinging or the Foucault effect.
 
 ## References
-1. J.L. Meriam, L. G. Kraige, *Engineering Mechanics: Statics*, 7th Edition, Chapter 6, Section 9. 
+1. J. L. Meriam, L. G. Kraige, Engineering Mechanics: Dynamics, 7ª ed., Wiley, Hoboken (NJ), 2012.
 2. R. A. Nelson, M. G. Olsson, "The pendulum—Rich physics from a simple system," *American Journal of Physics* 54, 112 (1986).
 3. D. Sucker, H. Brauer, "Fluiddynamik bei quer angeströmten Zylindern," *Wärme- und Stoffübertragung* 8, 149–158 (1975).
 4. G. G. Stokes, "On the Effect of the Internal Friction of Fluids on the Motion of Pendulums," *Transactions of the Cambridge Philosophical Society*, vol. 9, pp. 8-106, 1851.
-5. F. M. White, *Fluid Mechanics*, 8th Edition, McGraw-Hill Education, 2015. 
+5. F. M. White, Viscous Fluid Flow, 2ª ed., McGraw-Hill, New York, 1991

@@ -7,7 +7,6 @@
 #include "CSV_Reader.hpp"
 #include "Parameters.hpp"
 #include "Load_config.hpp"
-//this program also creates the Data_for_comparison.csv file
 int main() {
 	Parameters p;
 	load_config("../config.txt", p);
@@ -86,17 +85,6 @@ int main() {
 		std::cout << "Initial energy = " << initial_energy << std::endl;
 		std::cout << "Final energy = " << final_energy << std::endl;
 		std::cout << "Useful time = " << final_time << std::endl; 
-		std::string out_filename = "../csv/Data_for_comparison.csv";
-		std::ofstream out_file(out_filename);
-		if (out_file.is_open()) {
-			for (size_t i = 0; i < inversions.size(); i++) {
-				int index = inversions[i];
-				out_file << t_vec[index] << ", " << y_vec[index] << "\n";
-			}
-			out_file.close();
-			std::cout << "Data for comparison (t, y_inversion) written in the Data_for_comparison.csv file" << std::endl;
-		}
 	}
-
 	return 0;
 }
