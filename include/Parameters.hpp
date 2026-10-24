@@ -26,6 +26,7 @@ struct Parameters {
 	double rho;
 	double eta;
 	double T_final_mu;
+	double theta_tol;
 
 	Parameters() { //default constructor
 	        R = 0.08;
@@ -50,6 +51,7 @@ struct Parameters {
 		rho = 1.204;
 		eta = 1.81e-5;
 		T_final_mu = 158.55;
+		theta_tol = 1e-6;
 	}
 	
 	void validate() const {
@@ -73,6 +75,7 @@ struct Parameters {
 		if (rho <= 0) throw std::invalid_argument("Error: the air density (rho) must be > 0");
 		if (eta <= 0) throw std::invalid_argument("Error: the air viscosity (eta) must be > 0");
 		if (T_final_mu <= 0) throw std::invalid_argument("Error: the final time for mu calculation must be > 0");
+		if (theta_tol <= 0) throw std::invalid_argument("Error: the tolerance for theta must be > 0");
 	
 	}
 };
