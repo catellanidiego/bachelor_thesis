@@ -1,5 +1,6 @@
 #include "../include/Calculate_a_D_wire.hpp"
 #include "../include/Is_close.hpp"
+#include <iostream> //togli
 
 int main() {
 	int res = EXIT_SUCCESS;
@@ -22,12 +23,15 @@ int main() {
 		double p = (i + 0.5)*dp;
 		double v_local = std::abs(p*omega);
 		double C_D_local = Calculate_C_D_wire(v_local, D, rho, eta);
-		integral_sum += C_D_local*p*p*dp;
+		integral_sum += C_D_local*p*p*(p/p_f)*dp;
 	}
 	double a_D_wire_exact = 0.5*rho*omega*omega*D*integral_sum/m;
 	if (v > 0) {
 		a_D_wire_exact = -a_D_wire_exact;
 	}
+	std::cout << "Estimate = " << a_D_wire_estimate << std::endl;
+	std::cout << "Exact = " << a_D_wire_exact << std::endl;
+
 	bool test_1 = is_close(a_D_wire_estimate, a_D_wire_exact, 1e-6, 1e-6);
 	if (test_1 == 0) {res = EXIT_FAILURE;}
 	return res;

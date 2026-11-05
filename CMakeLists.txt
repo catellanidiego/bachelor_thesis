@@ -58,4 +58,4 @@ add_test(NAME C_D_wire COMMAND test_C_D_wire)
 
 add_executable(test_a_D_wire test/Test_Calculate_a_D_wire.cpp)
 target_include_directories(test_a_D_wire PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-add_test(NAME C_a_wire COMMAND test_a_D_wire)
+add_test(NAME a_D_wire COMMAND test_a_D_wire)
