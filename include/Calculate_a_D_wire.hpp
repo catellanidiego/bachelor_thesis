@@ -1,7 +1,7 @@
 #pragma once
 #include "Calculate_C_D_wire.hpp"
 
-inline double Calculate_a_D_wire(const double R, const double s, const double v, const double D, const double m, const double rho, const double eta) {
+inline double Calculate_a_D_wire(double R, double s, double v, double D, double m, double rho, double eta) {
 	double p_f = std::pow(16*R*R - s*s, 0.5);
 	if (p_f < 1e-6) {return 0.0;}
 	double omega = v/p_f;

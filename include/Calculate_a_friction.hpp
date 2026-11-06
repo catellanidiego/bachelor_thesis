@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>
 
-inline double Calculate_a_friction(const double mu_eq, const double v, const double s, const double R, const double epsilon, const double g) {
+inline double Calculate_a_friction(double mu_eq, double v, double s, double R, double epsilon, double g) {
 	double rad_arg = std::max(0.0, 16*R*R-s*s); //avoid complex numbers
 	double P = std::sqrt(rad_arg);
 	if (P < 1e-6) {P = 1e-6;} //avoid dividing by zero.

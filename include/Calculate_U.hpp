@@ -1,6 +1,6 @@
 #pragma once
 
-inline double Calculate_U(const double h, const double m, const double g) { //potential energy
+inline double Calculate_U(double h, double m, double g) { //potential energy
 	double U = g * m * h;
 	return U;
 }

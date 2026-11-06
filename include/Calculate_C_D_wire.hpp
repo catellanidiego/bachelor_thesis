@@ -2,7 +2,7 @@
 #include <cmath>
 #include "Calculate_Re.hpp"
 
-inline double Calculate_C_D_wire(const double v, const double D, const double rho, const double eta) {
+inline double Calculate_C_D_wire(double v, double D, double rho, double eta) {
 	double C_D_wire;
 	double Re = Calculate_Re(v, D/2, rho, eta);
 	if (Re < 1e-8) {Re = 1e-8;}
