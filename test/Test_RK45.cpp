@@ -10,7 +10,8 @@ int main() {
 	double r_tol = 1e-12;
 	double s_0 = 1.0;
 	double v_0 = 0.0;
-	Eigen::VectorXd Y = {s_0, v_0};
+	Eigen::VectorXd Y(2);
+	Y << s_0, v_0;
 	double omega = 2.0;
 	double T = 2*M_PI/omega;
 	double h_new_min = 1e-12;

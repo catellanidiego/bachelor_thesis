@@ -17,7 +17,7 @@ class CycloidalPendulum {
 		m = 0.0;
 		}
 	
-	//user constructur
+	//user constructor
 		CycloidalPendulum(double my_r, double my_R, double my_m) {
 			r = my_r;
 			R = my_R;
@@ -31,7 +31,7 @@ class CycloidalPendulum {
 		}
 
 		double y_from_s (double s_int) const {
-			double y_s = std::pow(s_int,2)/(8.0*R);
+			double y_s = s_int*s_int/(8.0*R);
 			return y_s;
 		}
 

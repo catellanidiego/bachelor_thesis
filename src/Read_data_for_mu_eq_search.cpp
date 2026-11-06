@@ -18,14 +18,13 @@ int main() {
 		return 1;
 	}
 
-
 	std::string f_dir;
 	std::cout << "Insert csv file direcotry" << std::endl;
 	while (!(std::cin >> f_dir)) {
+		if (std::cin.eof()) {return 1;}
 		if (std::cin.fail()) {
 			std::cin.clear();
 		}
-		if (std::cin.eof()) {return 1;}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cout << "Invalid input, try again" << std::endl;
 	}
@@ -45,9 +44,9 @@ int main() {
 	std::vector<int> inversions;
 	double current_max_y = - std::numeric_limits<double>::infinity();
 	int current_max_index = -1;
-	bool peak_found = False;
+	bool peak_found = false;
 	for (size_t i = 0; i < y_vec.size(); i++) {
-		if (peak_found == False) {
+		if (peak_found == false) {
 			if (y_vec[i] > y_avg) {
 				if (y_vec[i] > current_max_y) {
 					current_max_y = y_vec[i];
@@ -55,13 +54,13 @@ int main() {
 				}
 				else if (y_vec[i] < current_max_y - prominence_threshold) {
 					inversions.push_back(current_max_index);
-					peak_found = True;
+					peak_found = true;
 				}
 			}
 			
 		}
 		else if (y_vec[i] < y_avg) {
-			peak_found = False;
+			peak_found = false;
 			current_max_y = -std::numeric_limits<double>::infinity();
 		}
 

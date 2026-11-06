@@ -22,10 +22,10 @@ int main() {
 	std::string f_dir;
 	std::cout << "Insert csv file directory" << std::endl;
 	while (!(std::cin >> f_dir)) {
+		if (std::cin.eof()) {return 1;}
 		if (std::cin.fail()) {
 			std::cin.clear();
 		}
-		if (std::cin.eof()) {return 1;}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cout << "Invalid input, try again" << std::endl;
 	}

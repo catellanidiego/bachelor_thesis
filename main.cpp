@@ -25,6 +25,7 @@ int main() {
 	char time_count;
 	std::cout << "Do you wish record the algorithm speed? (y/n)" << std::endl;
 	while (!(std::cin >> time_count) || (toupper(static_cast<unsigned char>(time_count)) != 'Y' && toupper(static_cast<unsigned char>(time_count)) != 'N')) {
+		if (std::cin.eof()) {return 1;}
 		if (std::cin.fail()) {
 			std::cin.clear();
 		}
@@ -35,12 +36,11 @@ int main() {
 	
 	solution_type S;
 	CycloidalPendulum C(p.r, p.R, p.m);
-	if (toupper(time_count) == 'Y') {
-		timecounter tc;
-		tc.tic();
-	}
+	timecounter tc;
+	if (toupper(time_count) == 'Y') {tc.tic();}
 	try {
-		Eigen::VectorXd Y = {p.s, p.v};
+		Eigen::VectorXd Y(2);
+		Y << p.s, p.v;
 		F my_F(p.r, p.R, p.m, p.mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
 		double T = C.calculate_T(p.g);
 		double h_new_max = T/100; //get at least 100 points per period

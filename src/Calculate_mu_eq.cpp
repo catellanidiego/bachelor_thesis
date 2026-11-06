@@ -32,7 +32,8 @@ int main() {
 	double mu_low = 0.0;
 	double mu_high = 0.01; //upper bound
 	double mu_eq = (mu_high + mu_low) / 2.0;
-	Eigen::VectorXd Y = {p.s_i, p.v};
+	Eigen::VectorXd Y(2);
+	Y << p.s_i, p.v;
 	double T = C.calculate_T(p.g);
 	double h_new_max = T/100;
 	double total_T = p.T_final_mu;

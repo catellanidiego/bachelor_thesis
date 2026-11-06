@@ -54,7 +54,7 @@ struct Parameters {
 	
 	void validate() const {
 		if (R <= 0) throw std::invalid_argument("Error: the generator radius must be > 0");
-		if (r <= 0) throw std::invalid_argument("Error: the sphere's ray must be > 0");
+		if (r <= 0) throw std::invalid_argument("Error: the sphere's radius must be > 0");
 		if (m <= 0) throw std::invalid_argument("Error: the sphere's mass must be > 0");
 		if (std::abs(s) > 4*R) throw std::invalid_argument("Error: the sphere's initial position must be <= 4R");
 		if (a_tol <= 0) throw std::invalid_argument("Error: the absolute tolerance must be > 0");
