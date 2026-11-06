@@ -6,7 +6,7 @@
 #include <stdexcept>
 
 const std::vector<double> A = {0, 1.0/4.0, 3.0/8.0, 12.0/13.0, 1.0, 1.0/2.0};
-const std::vector<double> B_1 = {2.0/9.0}; //corrisponde a k_1
+const std::vector<double> B_1 = {2.0/9.0}; //coefficient of k_1
 const std::vector<double> B_2 = {1.0/12.0, 1.0/4.0};
 const std::vector<double> B_3 = {69.0/128.0, -243.0/128.0, 135.0/64.0};
 const std::vector<double> B_4 = {-17.0/12.0, 27.0/4.0, -27.0/5.0, 16.0/15.0};
@@ -54,13 +54,13 @@ solution_type RK_45(const Function& F, double t_final, Eigen::VectorXd Y, double
 			double h_new = 0.9*h*std::pow(1.0/worst_error, 0.2);
 			if (h_new > h_new_max) {
 				h_new = h_new_max;
-			};
+			}
 
 			Eigen::VectorXd Y_new = Y + C_5[0]*k_1 + C_5[1]*k_2 + C_5[2]*k_3 + C_5[3]*k_4 + C_5[4]*k_5 + C_5[5]*k_6;
 
 			if (h_new < h_new_min) {
 				throw std::runtime_error("Error: integration step below h_min. \n The system doesn't converge. \n Try changing the config.txt file");
-			};
+			}
 			
 			if (worst_error <= 1.0) {
 				t = t + h;
@@ -74,4 +74,4 @@ solution_type RK_45(const Function& F, double t_final, Eigen::VectorXd Y, double
 		} //internal while loop
 	} //external while loop
 	return S;
-};
+}

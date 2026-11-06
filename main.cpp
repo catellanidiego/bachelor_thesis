@@ -36,38 +36,27 @@ int main() {
 	solution_type S;
 	CycloidalPendulum C(p.r, p.R, p.m);
 	if (toupper(time_count) == 'Y') {
-		try {
-			timecounter tc;
-			tc.tic();
-			Eigen::Vector2d Y = {p.s, p.v};
-			F my_F(p.r, p.R, p.m, p.mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
-			double T = C.calculate_T();
-			double h_new_max = T/100; //get at least 100 points per period
-			double total_T = T*p.n_periods;
-			S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
+		timecounter tc;
+		tc.tic();
+	}
+	try {
+		Eigen::VectorXd Y = {p.s, p.v};
+		F my_F(p.r, p.R, p.m, p.mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
+		double T = C.calculate_T(p.g);
+		double h_new_max = T/100; //get at least 100 points per period
+		double total_T = T*p.n_periods;
+		S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
+		if (toupper(time_count) == 'Y') {
 			double secs = tc.toc();
 			std::cout << "Elapsed time = " << secs << " seconds" << std::endl;
 		}
-		catch (const std::exception& e) {
-			std::cerr << e.what() << std::endl;
-			return 1;
-		}
+	}
+
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+		return 1;
 	}
 	
-	else {
-		try {
-			Eigen::Vector2d Y = {p.s, p.v};
-			F my_F(p.r, p.R, p.m, p.mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
-			double T = C.calculate_T();
-			double h_new_max = T/100; //get at least 100 points
-			double total_T = T*p.n_periods;
-			S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
-		}
-		catch (const std::exception& e) {
-			std::cerr << e.what() << std::endl;
-			return 1;
-		}
-	}
 	std::vector<double> x_vec;
 	std::vector<double> y_vec;
 	std::vector<double> v_vec;

@@ -10,7 +10,7 @@ inline std::vector<std::vector<T>> CSV_reader(const std::string& f_dir, int line
 	std::vector<std::vector<T>> res; //the internal vectors are the columns of the CSV file
 	std::ifstream file(f_dir);
 	if (!file.is_open()) {
-		std::cerr << "Error:unable to open file." << std::endl;
+		std::cerr << "Error: unable to open file." << std::endl;
 		return {};
 	}
 	std::string row;

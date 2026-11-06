@@ -20,14 +20,14 @@ class F {
 	double epsilon;
 	public:	
 		F(double r_int, double R_int, double m_int, double mu_eq_int, double D_int, double g_int, double rho_int, double eta_int, double epsilon_int) : r_F(r_int), R_F(R_int), m_F(m_int), mu_eq_F(mu_eq_int), D_F(D_int), g(g_int), rho(rho_int), eta(eta_int), epsilon(epsilon_int) {} 
-		Eigen::VectorXd operator()(double t, Eigen::Vector2d& Y) const {
-			Eigen::Vector2d res;
+		Eigen::VectorXd operator()([[maybe_unusued]]double t, const Eigen::VectorXd& Y) const {
+			Eigen::VectorXd res;
 			res(0) = Y(1);
 			res(1) = Calculate_a_friction(mu_eq_F, Y(1), Y(0), R_F, epsilon, g);
 			double Re_sphere = Calculate_Re(Y(1), r_F, rho, eta);
 			if (Re_sphere <= 1) {
 				double a_D_sphere = Calculate_a_D_sphere_Stokes(Y(1), r_F, m_F, eta);
-				res(1) += -g/(4*R_F)*Y(0) + a_D_sphere + t*0; //avoid unusued variables warning
+				res(1) += -g/(4*R_F)*Y(0) + a_D_sphere;
 			}
 			else {
 				double C_D;

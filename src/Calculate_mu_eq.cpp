@@ -32,15 +32,15 @@ int main() {
 	double mu_low = 0.0;
 	double mu_high = 0.01; //upper bound
 	double mu_eq = (mu_high + mu_low) / 2.0;
-	Eigen::Vector2d Y = {p.s_i, p.v};
-	double T = C.calculate_T();
+	Eigen::VectorXd Y = {p.s_i, p.v};
+	double T = C.calculate_T(p.g);
 	double h_new_max = T/100;
 	double total_T = p.T_final_mu;
 	try {
 		while (1) {
 			F my_F(p.r, p.R, p.m, mu_eq, p.D, p.g, p.rho, p.eta, p.epsilon);
 			solution_type S = RK_45<F>(my_F, total_T, Y, p.delta_t, p.a_tol, p.r_tol, p.h_new_min, h_new_max);
-			Eigen::Vector2d Y_last = S.variables.back();
+			Eigen::VectorXd Y_last = S.variables.back();
 			double s_int = Y_last(0);
 			double v_int = Y_last(1);
 			double y_int = C.y_from_s(s_int);

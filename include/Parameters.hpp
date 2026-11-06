@@ -4,18 +4,18 @@
 #include <iostream>
 #include <cmath>
 struct Parameters {
-        double R;
-        double r;
-        double m;
-        double s;
-        double v;
-        double a_tol;
-        double r_tol;
-        double delta_t;
-        int n_periods;
-        double h_new_min;
+	double R;
+	double r;
+	double m;
+	double s;
+	double v;
+	double a_tol;
+	double r_tol;
+	double delta_t;
+	int n_periods;
+	double h_new_min;
 	double D;
-        double mu_eq;
+	double mu_eq;
 	double epsilon;
 	double E_tol;
 	double mu_tol;
@@ -53,7 +53,7 @@ struct Parameters {
 	}
 	
 	void validate() const {
-		if (R <= 0) throw std::invalid_argument("Error: the generator ray must be > 0");
+		if (R <= 0) throw std::invalid_argument("Error: the generator radius must be > 0");
 		if (r <= 0) throw std::invalid_argument("Error: the sphere's ray must be > 0");
 		if (m <= 0) throw std::invalid_argument("Error: the sphere's mass must be > 0");
 		if (std::abs(s) > 4*R) throw std::invalid_argument("Error: the sphere's initial position must be <= 4R");
@@ -65,10 +65,10 @@ struct Parameters {
 		if (D < 0) throw std::invalid_argument("Error: the wire diameter must be >= 0");
 		if (mu_eq < 0) throw std::invalid_argument("Error: the mu_eq coefficient must be >= 0");
 		if (epsilon <= 0) throw std::invalid_argument("Error: the epsilon must be > 0");
-		if (E_tol <= 0) throw std::invalid_argument("Error: the epsilon must be > 0");
-		if (mu_tol <= 0) throw std::invalid_argument("Error: the epsilon must be > 0");
-		if (std::abs(s_i) > 4*R) throw std::invalid_argument("Error: the initial position for mu_ed data extraction must be < 4*R");
-		if (E_final < 0) throw std::invalid_argument("Error: the finale energy must be >= 0");
+		if (E_tol <= 0) throw std::invalid_argument("Error: the tolerance for energy dissipation comparison must be > 0");
+		if (mu_tol <= 0) throw std::invalid_argument("Error: the tolerance for mu must be > 0");
+		if (std::abs(s_i) > 4*R) throw std::invalid_argument("Error: the initial position for mu_eq data extraction must be < 4*R");
+		if (E_final < 0) throw std::invalid_argument("Error: the final energy must be >= 0");
 		if (rho <= 0) throw std::invalid_argument("Error: the air density (rho) must be > 0");
 		if (eta <= 0) throw std::invalid_argument("Error: the air viscosity (eta) must be > 0");
 		if (T_final_mu <= 0) throw std::invalid_argument("Error: the final time for mu calculation must be > 0");

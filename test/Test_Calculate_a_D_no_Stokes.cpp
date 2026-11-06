@@ -16,7 +16,7 @@ int main() {
 	double C_D_sphere = Calculate_C_D_sphere_White(v, r, rho, eta);
 	double a_D_sphere = Calculate_a_D_sphere_no_Stokes(v, C_D_sphere, A, m, rho);
 	bool test_1 = is_close(a_D_sphere, -0.00109342, 1e-6, 1e-6);
-	if (test_1 == 0) {res = EXIT_FAILURE;}
+	if (!test_1) {res = EXIT_FAILURE;}
 
 	return res;
 }

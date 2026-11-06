@@ -25,6 +25,7 @@ int main() {
 		if (std::cin.fail()) {
 			std::cin.clear();
 		}
+		if (std::cin.eof()) {return 1;}
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cout << "Invalid input, try again" << std::endl;
 	}
@@ -44,9 +45,9 @@ int main() {
 	std::vector<int> inversions;
 	double current_max_y = - std::numeric_limits<double>::infinity();
 	int current_max_index = -1;
-	bool peak_found = 0;
+	bool peak_found = False;
 	for (size_t i = 0; i < y_vec.size(); i++) {
-		if (peak_found == 0) {
+		if (peak_found == False) {
 			if (y_vec[i] > y_avg) {
 				if (y_vec[i] > current_max_y) {
 					current_max_y = y_vec[i];
@@ -54,13 +55,13 @@ int main() {
 				}
 				else if (y_vec[i] < current_max_y - prominence_threshold) {
 					inversions.push_back(current_max_index);
-					peak_found = 1;
+					peak_found = True;
 				}
 			}
 			
 		}
 		else if (y_vec[i] < y_avg) {
-			peak_found = 0;
+			peak_found = False;
 			current_max_y = -std::numeric_limits<double>::infinity();
 		}
 
@@ -75,7 +76,7 @@ int main() {
 		int last_inversion_index = inversions[inversions.size() - 1];
 		double y_first_inversion = y_vec[first_inversion_index];
 		double y_last_inversion = y_vec[last_inversion_index];
-		double s_1 = std::pow(8*p.R*y_first_inversion, 0.5);
+		double s_1 = std::sqrt(8*p.R*y_first_inversion);
 		double initial_energy = p.m*p.g*y_first_inversion;
 		double final_energy = p.m*p.g*y_last_inversion;
 		double final_time = t_vec[last_inversion_index] - t_vec[first_inversion_index];

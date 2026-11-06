@@ -12,7 +12,7 @@ int main() {
 
 	double a_D_sphere_Stokes = Calculate_a_D_sphere_Stokes(v, r, m, eta);
 	bool test_1 = is_close(a_D_sphere_Stokes, -1.70588e-8, 1e-6, 1e-6);
-	if (test_1 == 0) {res = EXIT_FAILURE;}
+	if (!test_1) {res = EXIT_FAILURE;}
 
 	return res;
 }

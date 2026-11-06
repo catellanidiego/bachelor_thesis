@@ -10,7 +10,7 @@ inline double Calculate_C_D_wire(double v, double D, double rho, double eta) {
 		C_D_wire = (8*M_PI)/((Re)*(0.5-0.5772-log(Re/8))); 
 	}
 	else if (Re > 1e-4 && Re < 2e5) {
-		C_D_wire = 1.18 + (6.8)/(std::pow(Re, 0.89)) + (1.96)/(std::pow(Re, 0.5))- (0.0004*Re)/(1+3.64e-7*Re*Re);
+		C_D_wire = 1.18 + (6.8)/(std::pow(Re, 0.89)) + (1.96)/(std::sqrt(Re))- (0.0004*Re)/(1+3.64e-7*Re*Re);
 	}
 	else {
 		C_D_wire = 0.3;

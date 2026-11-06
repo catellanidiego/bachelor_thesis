@@ -3,8 +3,8 @@
 #include <Eigen/Dense>
 
 class CycloidalPendulum {
-	double r; //Sphere's ray (m)
-	double R; //Cycloid's generator ray (m)
+	double r; //Sphere's radius (m)
+	double R; //Cycloid's generator radius (m)
 	double m; //Sphere's mass (kg)
 	double s; //Sphere's position (m)
 	double v; //Sphere's velocity (m/s)
@@ -19,7 +19,6 @@ class CycloidalPendulum {
 	
 	//user constructur
 		CycloidalPendulum(double my_r, double my_R, double my_m) {
-		//VERIFICHE DI COERENZA FISICA
 			r = my_r;
 			R = my_R;
 			m = my_m;	
@@ -47,9 +46,8 @@ class CycloidalPendulum {
 			return omega;
 		}
 
-		double calculate_T() const {
-			double g = 9.81;
-			double T = 4*M_PI*std::pow(R/g,0.5);
+		double calculate_T(double g) const {
+			double T = 4*M_PI*std::sqrt(R/g);
 			return T;
 		}
 
