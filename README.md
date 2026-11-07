@@ -92,6 +92,10 @@ cd build
   |-CMakeLists.txt
   |-config.txt
   |-csv
+  |  |-CSV_E.csv
+  |  |-CSV_theta_omega.csv
+  |  |-CSV_t_x_y.csv
+  |  |-CSV_x_y.csv
   |  |-C_big_1.csv
   |  |-C_big_10.csv
   |  |-C_big_2.csv
@@ -142,6 +146,7 @@ cd build
   |  |-Calculate_C_D_sphere_White.hpp
   |  |-Calculate_C_D_wire.hpp
   |  |-Calculate_K.hpp
+  |  |-Calculate_p_f.hpp
   |  |-Calculate_Re.hpp
   |  |-Calculate_U.hpp
   |  |-CSV_Reader.hpp
@@ -151,15 +156,28 @@ cd build
   |  |-F_test.hpp
   |  |-Is_close.hpp
   |  |-Load_config.hpp
-  |  |-parameters.hpp
+  |  |-Parameters.hpp
   |  |-RK45_Solver.hpp
   |  |-Solution_type.hpp
   |  |-Timecounter.h
   |-main.cpp
   |-README.md
   |-src
+  |  |-Calculate_a_D_sphere_no_Stokes.cpp
+  |  |-Calculate_a_D_sphere_Stokes.cpp
+  |  |-Calculate_a_D_wire.cpp
+  |  |-Calculate_a_friction.cpp
+  |  |-Calculate_C_D_sphere_White.cpp
+  |  |-Calculate_C_D_wire.cpp
+  |  |-Calculate_K.cpp
   |  |-Calculate_mu_eq.cpp
+  |  |-Calculate_p_f.cpp
+  |  |-Calculate_Re.cpp
   |  |-Calculate_T_A_theta.cpp
+  |  |-Calculate_U.cpp
+  |  |-CSV_Writer.cpp
+  |  |-Is_close.cpp
+  |  |-Load_config.cpp
   |  |-Plot_theta_omega.py
   |  |-Plot_t_E.py
   |  |-Plot_t_x_y.py
