@@ -38,8 +38,8 @@ int main() {
 		std::cerr << e.what() << std::endl;
 		return 1;
 	}
-	if (V.size() < 3 || V[0].size() < 2 || V[1].size() != V[0].size()) {
-		std::cerr << "Error: the CSV file must have 2 columns of the same length, with at least 2 rows of data"
+	if (V.size() < 3 || V[0].size() < 2 || V[1].size() != V[0].size() || V[2].size() != V[0].size()) {
+		std::cerr << "Error: the CSV file must have 3 columns of the same length, with at least 2 rows of data"
  << std::endl;
 		return 1;	
 	}
