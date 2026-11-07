@@ -19,8 +19,9 @@ This repository is part of the bachelor thesis "Il problema dell'isocronismo per
 - Drag on the sphere: $\frac{1}{2}\rho C_{D, \text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s)$
     - $C_D$ is calculated with Stokes's regime ($\text{Re} \le 1$) [4], and White's regime ($1< \text{Re}\le 2\cdot 10^5$) [5].
 - Drag on the wire: $\frac{1}{2}\frac{\rho D}{\lambda} \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_D(p)p^3dp$
-    - $C_D$ was calculated with the Nelson and Olsson approximation ($\text{Re} < 10^{-4}$) [2], and Sucker and Brauer best-fit curve ($10^{-4} \le \text{Re} \le 2\cdot 10^5$) [3]
-The drag crisis of both the sphere and the wire is negligible since the $Re$ peaks at around 2000.
+    - $C_D$ was calculated with the Nelson and Olsson approximation ($\text{Re} < 10^{-4}$) [2], and Sucker and Brauer best-fit curve ($10^{-4} \le \text{Re} \le 2\cdot 10^5$) [3].
+
+The drag crisis of both the sphere and the wire is negligible since the $\text{Re}$ peaks at around 2000.
 
 ## Numerical method:
 - The Runge-Kutta-Fehlberg method, also known as RK45, was implemented with tolerances.
