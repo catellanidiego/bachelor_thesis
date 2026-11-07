@@ -66,7 +66,7 @@ cd build
 ./mu_eq
 
 ```
-Copy the extracted data in config.txt before launching ./mu_eq.
+Copy the extracted data into config.txt before launching ./mu_eq.
 
 ## Testing
 
@@ -79,7 +79,7 @@ cd build
 ctest
 
 ```
-This repository also contains a .cpp script to calculate the period, the amplitude and the angle $\theta$ of a pendulum for tracker data.
+This repository also contains a .cpp script to calculate the period, the amplitude and the angle $\theta$ of a pendulum from Tracker data.
 ```bash
 
 cd build

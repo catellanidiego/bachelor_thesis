@@ -23,7 +23,7 @@ int main() {
 	}
 
 	char time_count;
-	std::cout << "Do you wish record the algorithm speed? (y/n)" << std::endl;
+	std::cout << "Do you wish to record the algorithm speed? (y/n)" << std::endl;
 	while (!(std::cin >> time_count) || (toupper(static_cast<unsigned char>(time_count)) != 'Y' && toupper(static_cast<unsigned char>(time_count)) != 'N')) {
 		if (std::cin.eof()) {return 1;}
 		if (std::cin.fail()) {

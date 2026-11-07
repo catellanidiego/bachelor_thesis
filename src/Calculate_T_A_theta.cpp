@@ -21,7 +21,7 @@ int main() {
 	}
 	
 	std::string f_dir;
-	std::cout << "Insert csv file directory" << std::endl;
+	std::cout << "Insert csv file path" << std::endl;
 	while (!(std::cin >> f_dir)) {
 		if (std::cin.eof()) {return 1;}
 		if (std::cin.fail()) {
