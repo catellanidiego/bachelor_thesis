@@ -30,7 +30,19 @@ int main() {
 	}
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-	std::vector<std::vector<double>> V = CSV_reader<double>(f_dir, 2);
+	std::vector<std::vector<double>> V;
+	try {
+		V = CSV_reader<double>(f_dir, 2);
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	if (V.size() < 3 || V[0].size() < 2 || V[1].size() != V[0].size()) {
+		std::cerr << "Error: the CSV file must have 2 columns of the same length, with at least 2 rows of data"
+ << std::endl;
+		return 1;	
+	}
 	std::vector<double> t_vec = V[0];
 	std::vector<double> x_vec = V[1];
 	std::vector<double> y_vec = V[2];

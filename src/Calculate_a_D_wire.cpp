@@ -1,6 +1,6 @@
 #include "Calculate_C_D_wire.hpp"
 #include "Calculate_p_f.hpp"
-#include "Calculat_a_D_wire.hpp"
+#include "Calculate_a_D_wire.hpp"
 
 double Calculate_a_D_wire(double R, double s, double v, double D, double m, double rho, double eta) {
 	double p_f = Calculate_p_f(R, s);

@@ -1,8 +1,10 @@
-#include "Solution_type.hpp"
-#include "RK45_Solver.hpp"
 #include "F_test.hpp"
 #include <Eigen/Dense>
 #include <cmath>
+#include <numbers>
+#include "Solution_type.hpp"
+#include "RK45_Solver.hpp"
+
 int main() {
 	int res = EXIT_SUCCESS;
 	double delta_t = 1e-6;
@@ -13,7 +15,7 @@ int main() {
 	Eigen::VectorXd Y(2);
 	Y << s_0, v_0;
 	double omega = 2.0;
-	double T = 2*M_PI/omega;
+	double T = 2*std::numbers::pi/omega;
 	double h_new_min = 1e-12;
 	double h_new_max = T/20; 
 	F_test my_F(omega);

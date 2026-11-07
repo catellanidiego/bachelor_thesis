@@ -1,4 +1,5 @@
 #include <cmath>
+#include <numbers>
 #include "Calculate_a_D_sphere_no_Stokes.hpp"
 #include "Calculate_C_D_sphere_White.hpp"
 #include "Is_close.hpp"
@@ -6,7 +7,7 @@
 int main() {
 	int res = EXIT_SUCCESS;
 	double r = 0.01;
-	double A = M_PI*r*r;
+	double A = std::numbers::pi*r*r;
 	double m = 0.1;
 	double v = 1.0;
 	double rho = 1.204;

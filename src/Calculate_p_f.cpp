@@ -1,4 +1,5 @@
 #include <cmath>
+#include <algorithm>
 #include "Calculate_p_f.hpp"
 
 double Calculate_p_f(double R, double s) {

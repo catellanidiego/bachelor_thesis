@@ -1,4 +1,6 @@
 #include "Load_config.hpp"
+#include <fstream>
+#include <iostream>
 
 void load_config(const std::string& filename, Parameters& p) {
 	std::ifstream file(filename);
@@ -32,7 +34,8 @@ void load_config(const std::string& filename, Parameters& p) {
 		else if (key == "mu_tol") {file >> p.mu_tol;}
 		else {
 			std::string value;
-			file >> value; //skip the value of the unkown key
-			std::cerr << "Warning: unkown key '" << key << "' ignored" std::endl;
+			file >> value; //skip the value of the unknown key
+			std::cerr << "Warning: unknown key '" << key << "' ignored" << std::endl;
+		}
 	}
 }

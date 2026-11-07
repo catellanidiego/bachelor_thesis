@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <cmath>
+#include <numbers>
 #include "CSV_Reader.hpp"
 #include "Parameters.hpp"
 #include "Load_config.hpp"
@@ -30,8 +31,20 @@ int main() {
 		std::cout << "Invalid input, try again" << std::endl;
 	}
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::vector<std::vector<double>> V;
+	try {
+		V = CSV_reader<double>(f_dir, 2);
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << std::endl;
+		return 1;
+	}
+	if (V.size() < 2 || V[0].size() < 2 || V[1].size() != V[0].size()) {
+		std::cerr << "Error: the CSV file must have 2 columns of the same length, with at least 2 rows of data"
+ << std::endl;
+		return 1;	
+	}
 
-	std::vector<std::vector<double>> V = CSV_reader<double>(f_dir, 2);
 	std::vector<double> t_vec = V[0];
 	std::vector<double> x_vec = V[1];
 	std::vector<double> crossings;
@@ -57,7 +70,7 @@ int main() {
 		double amplitude = 0.5*(x_max-x_min);
 		double theta_s = std::asin(amplitude/(4.0*p.R));
 		double theta_c_low = 0.0;
-		double theta_c_high = M_PI/2.0;
+		double theta_c_high = std::numbers::pi/2.0;
 		double theta_c = (theta_c_low + theta_c_high)/2.0;
 		double amplitude_c = 0.0;
 		while ((theta_c_high - theta_c_low) > p.theta_tol) {

@@ -1,6 +1,7 @@
 #pragma once
 #include <cmath>
 #include <Eigen/Dense>
+#include <numbers>
 
 class CycloidalPendulum {
 	double r; //Sphere's radius (m)
@@ -47,7 +48,7 @@ class CycloidalPendulum {
 		}
 
 		double calculate_T(double g) const {
-			double T = 4*M_PI*std::sqrt(R/g);
+			double T = 4*std::numbers::pi*std::sqrt(R/g);
 			return T;
 		}
 

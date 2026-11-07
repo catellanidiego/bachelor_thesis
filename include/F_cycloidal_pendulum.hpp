@@ -1,5 +1,6 @@
 #pragma once
 #include <Eigen/Dense>
+#include <numbers>
 #include "Calculate_a_D_sphere_Stokes.hpp"
 #include "Calculate_a_D_sphere_no_Stokes.hpp"
 #include "Calculate_C_D_sphere_White.hpp"
@@ -34,7 +35,7 @@ class F {
 				if (Re_sphere > 1 && Re_sphere <= 2e5) {C_D = Calculate_C_D_sphere_White(Y(1), r_F, rho, eta);}
 				else {C_D = 0.1;}  //Case Re>2e5
 				
-				double Area = M_PI*r_F*r_F;
+				double Area = std::numbers::pi*r_F*r_F;
 				double a_D_sphere = Calculate_a_D_sphere_no_Stokes(Y(1), C_D, Area, m_F, rho);
 				res(1) += -g/(4*R_F)*Y(0) + a_D_sphere;
 			}
