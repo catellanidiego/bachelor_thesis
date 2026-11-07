@@ -66,6 +66,7 @@ cd build
 ./mu_eq
 
 ```
+Copy the extracted data in config.txt before launching ./mu_eq.
 
 ## Testing
 
@@ -203,8 +204,8 @@ cd build
 * **2D Planar Motion:** The simulation strictly models 2D planar motion, deliberately ignoring secondary 3D phenomena such as minor lateral swinging or the Foucault effect.
 
 ## References
-1. J. L. Meriam, L. G. Kraige, Engineering Mechanics: Dynamics, 7th ed., Wiley, Hoboken (NJ), 2012.
-2. R. A. Nelson, M. G. Olsson, "The pendulum—Rich physics from a simple system," *American Journal of Physics* 54, 112 (1986).
-3. D. Sucker, H. Brauer, "Fluiddynamik bei quer angeströmten Zylindern," *Wärme- und Stoffübertragung* 8, 149–158 (1975).
-4. G. G. Stokes, "On the Effect of the Internal Friction of Fluids on the Motion of Pendulums," *Transactions of the Cambridge Philosophical Society*, vol. 9, pp. 8-106, 1851.
-5. F. M. White, Viscous Fluid Flow, 2nd ed., McGraw-Hill, New York, 1991
+1. J. L. Meriam, L. G. Kraige, _Engineering Mechanics: Dynamics_, 7th ed., Wiley, Hoboken (NJ), 2012.
+2. R. A. Nelson, M. G. Olsson, _The pendulum—Rich physics from a simple system_, *American Journal of Physics* 54, 112 (1986).
+3. D. Sucker, H. Brauer, _Fluiddynamik bei quer angeströmten Zylindern_, *Wärme- und Stoffübertragung* 8, 149–158 (1975).
+4. G. G. Stokes, _On the Effect of the Internal Friction of Fluids on the Motion of Pendulums_, *Transactions of the Cambridge Philosophical Society*, vol. 9, pp. 8-106, 1851.
+5. F. M. White, _Viscous Fluid Flow_, 2nd ed., McGraw-Hill, New York, 1991.
