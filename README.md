@@ -1,6 +1,6 @@
 # Cycloidal isochronous pendulum simulator
 C++ and Python numerical simulation for a cycloidal pendulum's motion, with the effects of aerodynamic drag and friction between the string and the cheeks, validated by empirical data.
-This repository is part of the bachelor thesis "The isochronous pendulum" by Diego Catellani.
+This repository is part of the bachelor thesis "Il problema dell'isocronismo per i pendoli" by Diego Catellani.
 
 ![alternative_text](figure_readme.png)
 
@@ -11,13 +11,13 @@ This repository is part of the bachelor thesis "The isochronous pendulum" by Die
 * **CMake version:** CMake $\ge$ 3.20
 
 ## Physical model:
-**Equation of motion:** $m\ddot{s} + m\frac{g}{4R}s + \frac{1}{2}\rho C_{D,\text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s) + \frac{1}{2}\frac{\rho D}{\lambda} \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_D(p)p^3dp + \mu_{eq}m(g \cos(\theta) + \frac{v^2}{P(s)})  = 0$
+**Equation of motion:** $m\ddot{s} + m\frac{g}{4R}s + \frac{1}{2}\rho C_{D,\text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s) + \frac{1}{2}\frac{\rho D}{\lambda} \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_D(p)p^3dp \text{sgn}(\dot s) + \mu_{eq}m(g \cos(\theta) + \frac{v^2}{P(s)})\text{sgn}(\dot s)  = 0$
 
 - Wire-cheek friction: $\mu_{eq}m(g\cos(\theta) + \frac{v^2}{P(s)})$
     - $\mu_{eq}$ is calculated by comparing energy dissipation in the numerical simulation with data extracted from video tracking the physical pendulum.
     - The formulation follows Meriam and Kraige description. [1]
 - Drag on the sphere: $\frac{1}{2}\rho C_{D, \text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s)$
-    - $C_D$ is calculated with Stokes's regime ($\text{Re} < 1$) [4], and White's regime ($1\le \text{Re}\le 2\cdot 10^5$) [5].
+    - $C_D$ is calculated with Stokes's regime ($\text{Re} \le 1$) [4], and White's regime ($1< \text{Re}\le 2\cdot 10^5$) [5].
 - Drag on the wire: $\frac{1}{2}\frac{\rho D}{\lambda} \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_D(p)p^3dp$
     - $C_D$ was calculated with the Nelson and Olsson approximation ($\text{Re} < 10^{-4}$) [2], and Sucker and Brauer best-fit curve ($10^{-4} \le \text{Re} \le 2\cdot 10^5$) [3]
 The drag crisis of both the sphere and the wire is negligible since the $Re$ peaks at around 2000.
@@ -199,12 +199,12 @@ cd build
 ## Known limitations
 * **Rigid String Assumption:** The model assumes the pendulum's wire is inextensible and has zero torsional stiffness. The trajectory is assumed to be an ideal cycloid.
 * **Friction Lumping:** The complex micromechanical hysteresis of the wire winding and unwinding around the cycloidal cheeks is lumped into a single equivalent Coulomb dry friction coefficient ($\mu_{eq}$). 
-* **RK45 Discontinuity Error:** To prevent the RK45 solver from freezing at the inversion points (where velocity is zero and the friction term causes a mathematical discontinuity), a minimum time step ($h_{min}$) is strictly enforced.
+* **RK45 Discontinuity Error:** Inversion points are handled by regularizing $\text{sgn}(\dot s)$ with $\frac{2}{\pi}\cdot \arctg(\frac{\dot s}{\varepsilon})$; if the step falls below $h_{min}$, the solver stops with an error. 
 * **2D Planar Motion:** The simulation strictly models 2D planar motion, deliberately ignoring secondary 3D phenomena such as minor lateral swinging or the Foucault effect.
 
 ## References
-1. J. L. Meriam, L. G. Kraige, Engineering Mechanics: Dynamics, 7ª ed., Wiley, Hoboken (NJ), 2012.
+1. J. L. Meriam, L. G. Kraige, Engineering Mechanics: Dynamics, 7th ed., Wiley, Hoboken (NJ), 2012.
 2. R. A. Nelson, M. G. Olsson, "The pendulum—Rich physics from a simple system," *American Journal of Physics* 54, 112 (1986).
 3. D. Sucker, H. Brauer, "Fluiddynamik bei quer angeströmten Zylindern," *Wärme- und Stoffübertragung* 8, 149–158 (1975).
 4. G. G. Stokes, "On the Effect of the Internal Friction of Fluids on the Motion of Pendulums," *Transactions of the Cambridge Philosophical Society*, vol. 9, pp. 8-106, 1851.
-5. F. M. White, Viscous Fluid Flow, 2ª ed., McGraw-Hill, New York, 1991
+5. F. M. White, Viscous Fluid Flow, 2nd ed., McGraw-Hill, New York, 1991
