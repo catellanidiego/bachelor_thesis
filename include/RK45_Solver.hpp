@@ -5,7 +5,7 @@
 #include <cmath>
 #include <stdexcept>
 
-const std::vector<double> A = {0, 1.0/4.0, 3.0/8.0, 12.0/13.0, 1.0, 1.0/2.0};
+const std::vector<double> A = {0, 2.0/9.0, 1.0/3.0, 3.0/4.0, 1.0, 5.0/6.0};
 const std::vector<double> B_1 = {2.0/9.0}; //coefficient of k_1
 const std::vector<double> B_2 = {1.0/12.0, 1.0/4.0};
 const std::vector<double> B_3 = {69.0/128.0, -243.0/128.0, 135.0/64.0};

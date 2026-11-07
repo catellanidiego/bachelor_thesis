@@ -28,5 +28,11 @@ void load_config(const std::string& filename, Parameters& p) {
 		else if (key == "eta") {file >> p.eta;}
 		else if (key == "T_final_mu") {file >> p.T_final_mu;}
 		else if (key == "theta_tol") {file >> p.theta_tol;}
+		else if (key == "E_tol") {file >> p.E_tol;}
+		else if (key == "mu_tol") {file >> p.mu_tol;}
+		else {
+			std::string value;
+			file >> value; //skip the value of the unkown key
+			std::cerr << "Warning: unkown key '" << key << "' ignored" std::endl;
 	}
 }
