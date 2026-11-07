@@ -26,7 +26,7 @@ add_library(pendulum STATIC
 	src/Load_config.cpp
 	src/Timecounter.cpp
 )
-target_include_directories(pendulum PUBLIC ${CMAKE_CURENT_SOURCE_DIR}/include)
+target_include_directories(pendulum PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(pendulum PUBLIC Eigen3::Eigen)
 
 enable_testing()

@@ -1,5 +1,7 @@
 #include <cstdlib>
+#include <cmath>
 #include "Calculate_a_D_wire.hpp"
+#include "Calculate_C_D_wire.hpp"
 #include "Is_close.hpp"
 
 int main() {
