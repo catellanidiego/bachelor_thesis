@@ -15,7 +15,7 @@ add_library(pendulum STATIC
 	src/Calculate_C_D_sphere_White.cpp
 	src/Calculate_C_D_wire.cpp
 	src/Calculate_K.cpp
-	src/Calculate_RE.cpp
+	src/Calculate_Re.cpp
 	src/Calculate_U.cpp
 	src/Calculate_a_D_sphere_Stokes.cpp
 	src/Calculate_a_D_sphere_no_Stokes.cpp

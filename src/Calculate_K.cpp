@@ -1,7 +1,6 @@
-#include <cmath>
-#include "Calculate_Re.hpp"
+#include "Calculate_K.hpp"
 
-double Calculate_Re(double v, double r, double rho, double eta) {
-	double Re = 2*r*rho*std::abs(v)/eta; 
-	return Re;
+double Calculate_K (double v, double m) {
+	double K = 0.5*v*v*m;
+	return K;
 }
