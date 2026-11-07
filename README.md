@@ -13,7 +13,7 @@ This repository is part of the bachelor thesis "Il problema dell'isocronismo per
 ## Physical model:
 **Equation of motion:** $m\ddot{s} + m\frac{g}{4R}s + \frac{1}{2}\rho C_{D,\text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s) + \frac{1}{2}\frac{\rho D}{\lambda} \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_D(p)p^3dp \text{sgn}(\dot s) + \mu_{eq}m(g \cos(\theta) + \frac{v^2}{\lambda(s)})\text{sgn}(\dot s)  = 0$, where $\lambda(s) = \sqrt {16R^2-s^2}$.
 
-- Wire-cheek friction: $\mu_{eq}m(g\cos(\theta) + \frac{v^2}{P(s)})$
+- Wire-cheek friction: $\mu_{eq}m(g\cos(\theta) + \frac{v^2}{\lambda(s)})$
     - $\mu_{eq}$ is calculated by comparing energy dissipation in the numerical simulation with data extracted from video tracking the physical pendulum.
     - The formulation follows Meriam and Kraige description. [1]
 - Drag on the sphere: $\frac{1}{2}\rho C_{D, \text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s)$
@@ -93,10 +93,6 @@ cd build
   |-CMakeLists.txt
   |-config.txt
   |-csv
-  |  |-CSV_E.csv
-  |  |-CSV_theta_omega.csv
-  |  |-CSV_t_x_y.csv
-  |  |-CSV_x_y.csv
   |  |-C_big_1.csv
   |  |-C_big_10.csv
   |  |-C_big_2.csv
