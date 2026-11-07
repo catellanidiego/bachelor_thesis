@@ -11,7 +11,7 @@ This repository is part of the bachelor thesis "Il problema dell'isocronismo per
 * **CMake version:** CMake $\ge$ 3.20
 
 ## Physical model:
-**Equation of motion:** $m\ddot{s} + m\frac{g}{4R}s + \frac{1}{2}\rho C_{D,\text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s) + \frac{1}{2}\frac{\rho D}{\lambda} \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_D(p)p^3dp \text{sgn}(\dot s) + \mu_{eq}m(g \cos(\theta) + \frac{v^2}{P(s)})\text{sgn}(\dot s)  = 0$
+**Equation of motion:** $m\ddot{s} + m\frac{g}{4R}s + \frac{1}{2}\rho C_{D,\text{sphere}} A_{\text{sphere}} \dot s^2 \text{sgn}(\dot s) + \frac{1}{2}\frac{\rho D}{\lambda} \dot\theta^2\int\limits_0^{\sqrt {16R^2-s^2}}C_D(p)p^3dp \text{sgn}(\dot s) + \mu_{eq}m(g \cos(\theta) + \frac{v^2}{\lambda(s)})\text{sgn}(\dot s)  = 0$, where $\lambda(s) = \sqrt {16R^2-s^2}$.
 
 - Wire-cheek friction: $\mu_{eq}m(g\cos(\theta) + \frac{v^2}{P(s)})$
     - $\mu_{eq}$ is calculated by comparing energy dissipation in the numerical simulation with data extracted from video tracking the physical pendulum.
@@ -200,7 +200,7 @@ cd build
 ## Known limitations
 * **Rigid String Assumption:** The model assumes the pendulum's wire is inextensible and has zero torsional stiffness. The trajectory is assumed to be an ideal cycloid.
 * **Friction Lumping:** The complex micromechanical hysteresis of the wire winding and unwinding around the cycloidal cheeks is lumped into a single equivalent Coulomb dry friction coefficient ($\mu_{eq}$). 
-* **RK45 Discontinuity Error:** Inversion points are handled by regularizing $\text{sgn}(\dot s)$ with $\frac{2}{\pi}\cdot \arctg(\frac{\dot s}{\varepsilon})$; if the step falls below $h_{min}$, the solver stops with an error. 
+* **RK45 Discontinuity Error:** Inversion points are handled by regularizing $\text{sgn}(\dot s)$ with $\frac{2}{\pi}\cdot \arctan(\frac{\dot s}{\varepsilon})$; if the step falls below $h_{min}$, the solver stops with an error. 
 * **2D Planar Motion:** The simulation strictly models 2D planar motion, deliberately ignoring secondary 3D phenomena such as minor lateral swinging or the Foucault effect.
 
 ## References
